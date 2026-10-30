@@ -37,7 +37,7 @@ case "$subcommand" in
   train)
     shift
     # Training keeps the caller's accelerator selection; checks alone force CPU.
-    exec "$model_python" "$project_root/scripts/train.py" "${USV_TRAIN_CONFIG:-pi05_usv}" "$@"
+    exec "$model_python" "$project_root/scripts/train.py" "${USV_TRAIN_CONFIG:-pi05_usv_gps35}" "$@"
     ;;
   serve)
     shift
@@ -46,9 +46,10 @@ case "$subcommand" in
   *)
     echo '用法：bash scripts/model.sh check|batch-check [参数]'
     echo '      bash scripts/model.sh inspect-weights 本地NPZ --check-model [校验参数]'
-    echo '      bash scripts/model.sh export --output 新目录 回合目录...'
+    echo '      bash scripts/model.sh export --output 新目录 回合目录...（默认 35 维 GPS 版）'
     echo '      bash scripts/model.sh train --exp-name 名称 [训练参数]'
     echo '      bash scripts/model.sh serve --checkpoint 已训练检查点目录'
+    echo '默认训练/推理为 35 维 GPS 版；旧数据使用 --state-version 1 和配置 pi05_usv。'
     echo '使用当前python或USV_MODEL_PYTHON；数据根目录可用USV_DATA_HOME指定。'
     ;;
 esac

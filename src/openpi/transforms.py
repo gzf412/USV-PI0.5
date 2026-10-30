@@ -216,6 +216,9 @@ class TokenizePrompt(DataTransformFn):
             prompt = prompt.item()
 
         tokens, token_masks = self.tokenizer.tokenize(prompt, state)
+        if getattr(self.tokenizer, '_gps_coordinates', False):
+            # GPS is already preserved in prompt tokens; model state remains float32.
+            data['state'] = np.concatenate((state[:33], state[33:] / 180.0)).astype(np.float32)
         return {**data, "tokenized_prompt": tokens, "tokenized_prompt_mask": token_masks}
 
 

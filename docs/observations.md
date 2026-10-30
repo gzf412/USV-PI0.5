@@ -18,4 +18,4 @@
 
 结构化字段见`configs/observation.json`，实现分别在`src/usv_vla/core.py`与`src/openpi/policies/usv_policy.py`。
 
-可选的 GPS 版使用 39 维状态及单独的 `pi05_usv_gps` 配置，旧版协议保持不变。具体字段、150 米范围、旧数据转换和当前限制见 [GPS 状态 v2](gps_state.md)。
+当前 GPS 版使用 35 维状态及单独的 `pi05_usv_gps35` 配置，旧版协议保持不变。具体字段、精度、旧数据转换和当前限制见 [GPS 状态说明](gps_state.md)。

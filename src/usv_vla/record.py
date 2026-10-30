@@ -413,16 +413,17 @@ def run(args):
                         teacher = ScriptedTeacher(task)
                     sim_started = decision_ns
                 state = pack_state(pose, velocity, initial_yaw, previous_command, buoys)
-                from usv_vla.gps_state import extend_state
+                from usv_vla.gps_state import extend_state, gps_position_state
                 fix = selected['gps'][2]
                 gps = (fix.latitude_deg, fix.longitude_deg)
-                if gps_origin is None:
-                    gps_origin = gps
-                    spec['gps_state_v2_origin_lat_lon_deg'] = list(gps_origin)
-                    (output/'episode.json').write_text(json.dumps(spec, indent=2)+'\n')
-                # Existing evaluator handles buoy tasks only; no GPS goal is fabricated.
-                state_gps_v2 = extend_state(state, gps=gps, origin=gps_origin)
-                policy_state = state_gps_v2 if policy is not None and policy.metadata['state_dim'] == 39 else state
+                state_gps_v3 = gps_position_state(state, gps)
+                policy_state = state
+                if policy is not None and policy.metadata['state_dim'] == 35:
+                    policy_state = state_gps_v3
+                elif policy is not None and policy.metadata['state_dim'] == 39:
+                    if gps_origin is None:
+                        gps_origin = gps
+                    policy_state = extend_state(state, gps=gps, origin=gps_origin)
                 # Use the same model-side scales to reject unencodable pilot samples.
                 scales = np.array([2,2,1,math.pi,math.pi,1,1,1,1]+[32,32,1]*8)
                 if np.any(np.abs(state/scales) > 1):
@@ -470,13 +471,13 @@ def run(args):
                            decision_latest_clock_sim_time_ns=clock_ns,
                            decision_tick_lateness_ns=clock_ns-decision_ns,
                            state=state.tolist(), state_source="simulator_pose_debug_not_real_localization",
-                           state_gps_v2=state_gps_v2.tolist(),
+                           state_gps_v3=state_gps_v3.tolist(),
                            image=f"images/{selected['image'][0]:019d}.jpg", prompt=prompt,
                            pose_xyzrpy=[pose[0],pose[1],boat.position.z,roll,pitch,yaw],
                            action=action, action_publish_monotonic_ns=published_wall_ns,
                            sources=sources, policy_inference=policy_info,
                            policy_input_prompt=submitted_policy_prompt,
-                           policy_input_state=(policy_state.tolist() if policy is not None and policy.metadata['state_dim'] == 39 else None),
+                           policy_input_state=(policy_state.tolist() if policy is not None and policy.metadata['state_dim'] in (35, 39) else None),
                            clearance_m=clearance, **result)
                 steps.write(json.dumps(row)+"\n")
                 steps.flush()

@@ -6,11 +6,25 @@ import unittest
 
 import numpy as np
 
-from usv_vla.gps_state import extend_state, local_east_north, normalize_extra
+from usv_vla.gps_state import extend_state, local_east_north, normalize_extra, gps_e7, gps_position_state
 from usv_vla.export_lerobot import gps_v2_states
 
 
 class GpsStateTests(unittest.TestCase):
+    def test_position_only_preserves_precision_and_requires_fix(self):
+        state = gps_position_state(np.zeros(33), (-33.7227403, 150.6739852))
+        self.assertEqual((state.shape, state.dtype), ((35,), np.float64))
+        np.testing.assert_array_equal(gps_e7(state[-2:]), [-337227403, 1506739852])
+        with self.assertRaises(ValueError):
+            gps_position_state(np.zeros(33), None)
+
+    def test_35_state_rpc_keeps_longitude_precision(self):
+        from usv_vla.policy_bridge import request_message, validate_metadata
+        validate_metadata({'state_dim': 35, 'action_dim': 2, 'action_units': 'N'})
+        state = gps_position_state(np.zeros(33), (-33.7227403, 150.6739852))
+        msg = request_message(1, state, np.zeros((8, 8, 3), np.uint8), 'test', 2, 2,
+                              {'gps': {'source_time_ns': 1, 'arrival_monotonic_ns': 1}})
+        self.assertEqual(msg['state'][-1], 150.6739852)
     def test_wgs84_local_and_body_frame(self):
         origin = (0., 0.)
         goal = (0., 100 / 6378137 * 180 / math.pi)

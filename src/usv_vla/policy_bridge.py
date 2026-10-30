@@ -21,8 +21,8 @@ from PIL import Image
 def validate_metadata(metadata):
     if not isinstance(metadata, dict):
         raise ValueError("Policy metadata must be an object")
-    if type(metadata.get("state_dim")) is not int or metadata["state_dim"] not in (33, 39):
-        raise ValueError("Policy metadata requires state_dim=33 or 39")
+    if type(metadata.get("state_dim")) is not int or metadata["state_dim"] not in (33, 35, 39):
+        raise ValueError("Policy metadata requires state_dim=33, 35 or 39")
     for key, expected in (("action_dim", 2), ("action_units", "N")):
         if metadata.get(key) != expected or isinstance(metadata.get(key), bool):
             raise ValueError(f"Policy metadata requires {key}={expected!r}")
@@ -41,10 +41,13 @@ def first_action(actions):
 
 
 def request_message(request_id, state, rgb, prompt, decision_sim_ns, decision_wall_ns, sources):
-    state = np.asarray(state, dtype=np.float32)
+    state = np.asarray(state)
+    if state.shape == (35,) and state.dtype != np.float64:
+        raise ValueError('GPS state must retain float64 coordinates before tokenization')
+    state = state.astype(np.float64 if state.shape == (35,) else np.float32, copy=False)
     rgb = np.asarray(rgb)
-    if state.shape not in ((33,), (39,)) or not np.isfinite(state).all():
-        raise ValueError("Policy requires finite raw state[33] or state[39]")
+    if state.shape not in ((33,), (35,), (39,)) or not np.isfinite(state).all():
+        raise ValueError("Policy requires finite raw state[33], state[35], or state[39]")
     if rgb.ndim != 3 or rgb.shape[-1] != 3 or rgb.dtype != np.uint8:
         raise ValueError("Policy requires HWC uint8 RGB")
     if not isinstance(prompt, str) or not prompt.strip():

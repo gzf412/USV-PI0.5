@@ -12,7 +12,7 @@ def main():
     parser.add_argument("--checkpoint", type=Path, required=True, help="Trained checkpoint directory containing params/")
     parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--port", type=int, default=8000)
-    parser.add_argument("--config", choices=['pi05_usv', 'pi05_usv_gps'], default='pi05_usv',
+    parser.add_argument("--config", choices=['pi05_usv', 'pi05_usv_gps', 'pi05_usv_gps35'], default='pi05_usv_gps35',
                         help='Must match the configuration used to train the checkpoint')
     args = parser.parse_args()
     if not (args.checkpoint / "params").is_dir():

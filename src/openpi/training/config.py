@@ -104,7 +104,8 @@ class ModelTransformFactory(GroupFactory):
                         _transforms.InjectDefaultPrompt(self.default_prompt),
                         _transforms.ResizeImages(224, 224),
                         _transforms.TokenizePrompt(
-                            _tokenizer.PaligemmaTokenizer(model_config.max_token_len, strict=model_config.strict_tokenization),
+                            _tokenizer.PaligemmaTokenizer(model_config.max_token_len, strict=model_config.strict_tokenization,
+                                                        gps_coordinates=model_config.state_dim == 35),
                             discrete_state_input=model_config.discrete_state_input,
                         ),
                         _transforms.PadStatesAndActions(model_config.action_dim, model_config.state_dim),
@@ -169,19 +170,18 @@ class LeRobotUSVDataConfig(DataConfigFactory):
     def create(self, assets_dirs: pathlib.Path, model_config: _model.BaseModelConfig) -> DataConfig:
         if not isinstance(model_config, pi0_config.Pi0Config) or not model_config.pi05:
             raise ValueError("USV v1 expects the pi0.5 model path.")
-        if model_config.state_dim not in (33, 39) or model_config.action_dim != 2:
-            raise ValueError("USV requires state_dim=33 or 39 and action_dim=2.")
-        state_version = 2 if model_config.state_dim == 39 else 1
+        if model_config.state_dim not in (33, 35, 39) or model_config.action_dim != 2:
+            raise ValueError("USV requires state_dim=33, 35 or 39 and action_dim=2.")
+        state_version = {33: 1, 39: 2, 35: 3}[model_config.state_dim]
+        repack = {"images": {"front": "observation.images.front"}, "state": "observation.state",
+                  "actions": "action", "prompt": "prompt"}
+        if state_version == 3:
+            repack["gps_e7"] = "observation.gps_e7"
         return DataConfig(
             repo_id=self.repo_id,
             asset_id=f"usv_v{state_version}",
             norm_stats={},
-            repack_transforms=_transforms.Group(inputs=[_transforms.RepackTransform({
-                "images": {"front": "observation.images.front"},
-                "state": "observation.state",
-                "actions": "action",
-                "prompt": "prompt",
-            })]),
+            repack_transforms=_transforms.Group(inputs=[_transforms.RepackTransform(repack)]),
             data_transforms=_transforms.Group(inputs=[usv_policy.UsvInputs(state_version=state_version)], outputs=[usv_policy.UsvOutputs()]),
             model_transforms=ModelTransformFactory()(model_config),
             action_sequence_keys=("action",),
@@ -280,6 +280,17 @@ class TrainConfig:
 
 
 _CONFIGS = [
+    TrainConfig(
+        name="pi05_usv_gps35",
+        model=pi0_config.Pi0Config(pi05=True, state_dim=35, action_dim=2, action_horizon=10,
+                                   max_token_len=384, strict_tokenization=True),
+        data=LeRobotUSVDataConfig(repo_id="local/usv_v3"),
+        weight_loader=weight_loaders.PaliGemmaWeightLoader(),
+        batch_size=4,
+        wandb_enabled=False,
+        policy_metadata={"state_dim": 35, "state_version": 3, "action_dim": 2,
+                         "action_units": "N", "policy_hz": 10, "proposed_execute_steps": 1},
+    ),
     TrainConfig(
         name="pi05_usv_gps",
         model=pi0_config.Pi0Config(pi05=True, state_dim=39, action_dim=2, action_horizon=10,

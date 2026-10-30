@@ -15,6 +15,26 @@ from openpi.transforms import PadStatesAndActions
 
 
 class AdapterChecks(unittest.TestCase):
+    def test_absolute_gps_precision_in_policy_tokens(self):
+        from openpi.models.tokenizer import PaligemmaTokenizer
+        from openpi.training.config import get_config
+        config = get_config('pi05_usv_gps35')
+        self.assertEqual((config.model.state_dim, config.model.action_dim), (35, 2))
+        config.data.create(config.assets_dirs, config.model)
+        state = np.zeros(33, np.float32)
+        image = np.zeros((8, 8, 3), np.uint8)
+        tokenizer = PaligemmaTokenizer(384, strict=True, gps_coordinates=True)
+        texts = []
+        for longitude in (1506739852, 1506739853):
+            adapted = UsvInputs(state_version=3)({'state': state, 'gps_e7': np.array([-337227403, longitude], np.int32),
+                                                   'images': {'front': image}})
+            self.assertEqual(adapted['state'].dtype, np.float64)
+            tokens, mask = tokenizer.tokenize('Approach buoy.', adapted['state'])
+            texts.append(tokenizer._tokenizer.decode(tokens[mask].tolist()))
+        self.assertIn('longitude 150.6739852', texts[0])
+        self.assertIn('longitude 150.6739853', texts[1])
+        self.assertNotEqual(texts[0], texts[1])
+
     def test_gps_v2_config_and_tokenizer(self):
         from openpi.training.config import get_config
         from openpi.models.tokenizer import PaligemmaTokenizer

@@ -23,6 +23,21 @@ def _latlon(value):
     return lat, lon
 
 
+def gps_e7(position):
+    """Store latitude/longitude as signed integers at 1e-7 degree resolution."""
+    lat, lon = _latlon(position)
+    return np.array([round(lat * 10_000_000), round(lon * 10_000_000)], dtype=np.int32)
+
+
+def gps_position_state(state, gps):
+    """35-value state with absolute WGS84 degrees; keep float64 until tokenized."""
+    base = np.asarray(state, dtype=np.float64)
+    if base.shape != (33,) or not np.isfinite(base).all():
+        raise ValueError('Expected finite 33-dimensional legacy state')
+    lat, lon = _latlon(gps)
+    return np.concatenate((base, np.array([lat, lon], dtype=np.float64)))
+
+
 def local_east_north(origin, position):
     lat0, lon0 = _latlon(origin)
     lat, lon = _latlon(position)

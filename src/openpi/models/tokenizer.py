@@ -6,9 +6,10 @@ import numpy as np
 import sentencepiece
 
 class PaligemmaTokenizer:
-    def __init__(self, max_len: int = 48, *, strict: bool = False):
+    def __init__(self, max_len: int = 48, *, strict: bool = False, gps_coordinates: bool = False):
         self._max_len = max_len
         self._strict = strict
+        self._gps_coordinates = gps_coordinates
 
         default_path = Path(__file__).resolve().parents[3] / "assets/tokenizer/paligemma_tokenizer.model"
         path = Path(os.environ.get("USV_TOKENIZER_PATH", str(default_path))).expanduser()
@@ -24,6 +25,16 @@ class PaligemmaTokenizer:
     def tokenize(self, prompt: str, state: np.ndarray | None = None) -> tuple[np.ndarray, np.ndarray]:
         cleaned_text = prompt.strip().replace("_", " ").replace("\n", " ")
         if state is not None:
+            gps_text = ""
+            if self._gps_coordinates:
+                state = np.asarray(state)
+                if state.shape != (35,) or state.dtype != np.float64:
+                    raise ValueError('GPS tokenization requires float64 state[35]')
+                latitude, longitude = state[-2:]
+                if not np.isfinite([latitude, longitude]).all() or abs(latitude) > 90 or abs(longitude) > 180:
+                    raise ValueError('Invalid GPS latitude/longitude')
+                gps_text = f" GPS latitude {latitude:.7f} longitude {longitude:.7f};"
+                state = state[:33]
             # This is the Pi05 format, where the state is part of the discrete language input.
             if self._strict and (not np.isfinite(state).all() or np.any(np.abs(state) > 1)):
                 raise ValueError("State must be finite and normalized to [-1, 1].")
@@ -31,7 +42,7 @@ class PaligemmaTokenizer:
             if self._strict:
                 discretized_state = np.clip(discretized_state, 0, 255)
             state_str = " ".join(map(str, discretized_state))
-            full_prompt = f"Task: {cleaned_text}, State: {state_str};\nAction: "
+            full_prompt = f"Task: {cleaned_text}, State: {state_str};{gps_text}\nAction: "
             tokens = self._tokenizer.encode(full_prompt, add_bos=True)
         else:
             # This is the Pi0 format, where the state is part of the continuous action expert input.

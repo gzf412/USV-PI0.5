@@ -60,7 +60,7 @@ class UsvInputs(transforms.DataTransformFn):
     state_version: int = 1
 
     def __call__(self, data):
-        raw_state = np.asarray(data["state"], dtype=np.float32)
+        raw_state = np.asarray(data["state"])
         if self.state_version == 1:
             state = normalize_state(raw_state)
         elif self.state_version == 2:
@@ -68,6 +68,17 @@ class UsvInputs(transforms.DataTransformFn):
             if raw_state.shape != (39,):
                 raise ValueError("USV GPS state must have 39 dimensions")
             state = np.concatenate((normalize_state(raw_state[:33]), normalize_extra(raw_state[33:])))
+        elif self.state_version == 3:
+            from usv_vla.gps_state import gps_position_state
+            if 'gps_e7' in data:
+                gps = np.asarray(data['gps_e7'])
+                if gps.shape != (2,) or not np.issubdtype(gps.dtype, np.integer):
+                    raise ValueError('GPS input requires two integer coordinates at 1e-7 degrees')
+                state = gps_position_state(normalize_state(raw_state), gps.astype(np.float64) / 10_000_000)
+            elif raw_state.shape == (35,) and raw_state.dtype == np.float64:
+                state = gps_position_state(normalize_state(raw_state[:33]), raw_state[33:])
+            else:
+                raise ValueError('GPS state requires 33 values plus integer GPS or float64 state[35]')
         else:
             raise ValueError("Unknown USV state version")
         incoming = data["images"]
