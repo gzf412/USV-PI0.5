@@ -1,0 +1,271 @@
+{
+  "version": "usv_vla_v1",
+  "architecture": "pi0.5",
+  "state": {
+    "dimension": 33,
+    "ordered_fields": [
+      {
+        "name": "u",
+        "unit": "m/s",
+        "meaning": "body-forward ground-relative velocity"
+      },
+      {
+        "name": "v",
+        "unit": "m/s",
+        "meaning": "body-left ground-relative velocity"
+      },
+      {
+        "name": "r",
+        "unit": "rad/s",
+        "meaning": "body-z angular velocity"
+      },
+      {
+        "name": "roll",
+        "unit": "rad",
+        "meaning": "roll relative to local level"
+      },
+      {
+        "name": "pitch",
+        "unit": "rad",
+        "meaning": "pitch relative to local level"
+      },
+      {
+        "name": "sin_yaw_relative",
+        "unit": "unitless",
+        "meaning": "sin of yaw minus episode initial yaw"
+      },
+      {
+        "name": "cos_yaw_relative",
+        "unit": "unitless",
+        "meaning": "cos of yaw minus episode initial yaw"
+      },
+      {
+        "name": "left_command_previous",
+        "unit": "normalized",
+        "meaning": "previous published left command / 15N"
+      },
+      {
+        "name": "right_command_previous",
+        "unit": "normalized",
+        "meaning": "previous published right command / 15N"
+      },
+      {
+        "name": "buoy_1_red_round_forward_m",
+        "unit": "m",
+        "meaning": "body-forward relative position"
+      },
+      {
+        "name": "buoy_1_red_round_left_m",
+        "unit": "m",
+        "meaning": "body-left relative position"
+      },
+      {
+        "name": "buoy_1_red_round_present",
+        "unit": "binary",
+        "meaning": "map/scene existence, not camera visibility"
+      },
+      {
+        "name": "buoy_2_red_pointed_forward_m",
+        "unit": "m",
+        "meaning": "body-forward relative position"
+      },
+      {
+        "name": "buoy_2_red_pointed_left_m",
+        "unit": "m",
+        "meaning": "body-left relative position"
+      },
+      {
+        "name": "buoy_2_red_pointed_present",
+        "unit": "binary",
+        "meaning": "map/scene existence, not camera visibility"
+      },
+      {
+        "name": "buoy_3_yellow_round_forward_m",
+        "unit": "m",
+        "meaning": "body-forward relative position"
+      },
+      {
+        "name": "buoy_3_yellow_round_left_m",
+        "unit": "m",
+        "meaning": "body-left relative position"
+      },
+      {
+        "name": "buoy_3_yellow_round_present",
+        "unit": "binary",
+        "meaning": "map/scene existence, not camera visibility"
+      },
+      {
+        "name": "buoy_4_yellow_pointed_forward_m",
+        "unit": "m",
+        "meaning": "body-forward relative position"
+      },
+      {
+        "name": "buoy_4_yellow_pointed_left_m",
+        "unit": "m",
+        "meaning": "body-left relative position"
+      },
+      {
+        "name": "buoy_4_yellow_pointed_present",
+        "unit": "binary",
+        "meaning": "map/scene existence, not camera visibility"
+      },
+      {
+        "name": "buoy_5_green_round_forward_m",
+        "unit": "m",
+        "meaning": "body-forward relative position"
+      },
+      {
+        "name": "buoy_5_green_round_left_m",
+        "unit": "m",
+        "meaning": "body-left relative position"
+      },
+      {
+        "name": "buoy_5_green_round_present",
+        "unit": "binary",
+        "meaning": "map/scene existence, not camera visibility"
+      },
+      {
+        "name": "buoy_6_green_pointed_forward_m",
+        "unit": "m",
+        "meaning": "body-forward relative position"
+      },
+      {
+        "name": "buoy_6_green_pointed_left_m",
+        "unit": "m",
+        "meaning": "body-left relative position"
+      },
+      {
+        "name": "buoy_6_green_pointed_present",
+        "unit": "binary",
+        "meaning": "map/scene existence, not camera visibility"
+      },
+      {
+        "name": "buoy_7_blue_round_forward_m",
+        "unit": "m",
+        "meaning": "body-forward relative position"
+      },
+      {
+        "name": "buoy_7_blue_round_left_m",
+        "unit": "m",
+        "meaning": "body-left relative position"
+      },
+      {
+        "name": "buoy_7_blue_round_present",
+        "unit": "binary",
+        "meaning": "map/scene existence, not camera visibility"
+      },
+      {
+        "name": "buoy_8_blue_pointed_forward_m",
+        "unit": "m",
+        "meaning": "body-forward relative position"
+      },
+      {
+        "name": "buoy_8_blue_pointed_left_m",
+        "unit": "m",
+        "meaning": "body-left relative position"
+      },
+      {
+        "name": "buoy_8_blue_pointed_present",
+        "unit": "binary",
+        "meaning": "map/scene existence, not camera visibility"
+      }
+    ],
+    "velocity_source": "causal backward difference of simulator root pose; privileged simulation debug; real estimator pending",
+    "body_frame": "forward-left-up",
+    "world_frame": "local ENU",
+    "raw_absolute_gps_as_policy_state": false,
+    "known_target_relative_position_as_policy_state": true
+  },
+  "camera": {
+    "policy_streams": [
+      "front_rgb"
+    ],
+    "stereo_policy_input": false,
+    "raw_width": 1280,
+    "raw_height": 720,
+    "raw_rate_hz": 30,
+    "horizontal_fov_rad": 1.3962634,
+    "current_model_input": [
+      224,
+      224
+    ],
+    "calibration_and_source_timestamps_required": true,
+    "reserved_policy_slots": 3,
+    "inactive_slots_use_false_image_mask": true
+  },
+  "action": {
+    "order": [
+      "left_thrust_command_N",
+      "right_thrust_command_N"
+    ],
+    "limits_N": [
+      -15,
+      15
+    ],
+    "semantics": "published command, not measured thrust"
+  },
+  "normalization": {
+    "method": "fixed engineering scales in openpi.policies.usv_policy",
+    "body_velocity_scale_mps": 2,
+    "body_angular_velocity_scale_radps": 1,
+    "roll_pitch_scale_rad": 3.141592653589793,
+    "position_scale_m": 32,
+    "previous_command_fields": "already divided by 15N in recorder; no second division",
+    "missing_coordinates": "zero after normalization",
+    "present_fields": "retain exact 0 or 1 before discrete tokenization",
+    "out_of_range": "reject, do not silently saturate",
+    "position_bin_width_m": 0.25
+  },
+  "buoy_slot_order": [
+    {
+      "slot": 1,
+      "color": "red",
+      "shape": "round",
+      "prefix": "buoy_1_red_round"
+    },
+    {
+      "slot": 2,
+      "color": "red",
+      "shape": "pointed",
+      "prefix": "buoy_2_red_pointed"
+    },
+    {
+      "slot": 3,
+      "color": "yellow",
+      "shape": "round",
+      "prefix": "buoy_3_yellow_round"
+    },
+    {
+      "slot": 4,
+      "color": "yellow",
+      "shape": "pointed",
+      "prefix": "buoy_4_yellow_pointed"
+    },
+    {
+      "slot": 5,
+      "color": "green",
+      "shape": "round",
+      "prefix": "buoy_5_green_round"
+    },
+    {
+      "slot": 6,
+      "color": "green",
+      "shape": "pointed",
+      "prefix": "buoy_6_green_pointed"
+    },
+    {
+      "slot": 7,
+      "color": "blue",
+      "shape": "round",
+      "prefix": "buoy_7_blue_round"
+    },
+    {
+      "slot": 8,
+      "color": "blue",
+      "shape": "pointed",
+      "prefix": "buoy_8_blue_pointed"
+    }
+  ],
+  "policy_rate_hz": 10,
+  "state_source": "simulator_pose_debug_not_real_localization"
+}

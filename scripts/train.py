@@ -1,3 +1,10 @@
+"""Official openpi JAX training loop, restricted to the USV configuration."""
+from pathlib import Path
+import sys
+
+# Direct script execution uses this project's sources, not the old editable install.
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
+
 import dataclasses
 import functools
 import logging
@@ -44,6 +51,8 @@ def init_logging():
 
     logger = logging.getLogger()
     logger.setLevel(logging.INFO)
+    if not logger.handlers:
+        logger.addHandler(logging.StreamHandler())
     logger.handlers[0].setFormatter(formatter)
 
 

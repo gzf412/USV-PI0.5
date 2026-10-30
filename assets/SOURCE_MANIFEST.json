@@ -1,0 +1,317 @@
+{
+  "description": "Copied upstream files before local URI portability edits; source provenance only. See PORTABILITY_MANIFEST.json for final hashes.",
+  "files": [
+    {
+      "path": "assets/models/sydney_regatta/model.config",
+      "source": "/home/gzf/.gz/fuel/fuel.gazebosim.org/openrobotics/models/sydney_regatta/3/model.config",
+      "bytes": 407,
+      "sha256": "be71ec14038d44f3a26413dec2791ed22e18e4ac18c4afb2d65ae50f6c3982f2"
+    },
+    {
+      "path": "assets/models/sydney_regatta/model.sdf",
+      "source": "/home/gzf/.gz/fuel/fuel.gazebosim.org/openrobotics/models/sydney_regatta/3/model.sdf",
+      "bytes": 3634,
+      "sha256": "d26f2ae8c6c5ee81d721e5310d739ecd0e766ffd134686f107fd38cb28dd7a02"
+    },
+    {
+      "path": "assets/models/sydney_regatta/meshes/sydney_regatta.dae",
+      "source": "/home/gzf/.gz/fuel/fuel.gazebosim.org/openrobotics/models/sydney_regatta/3/meshes/sydney_regatta.dae",
+      "bytes": 17636894,
+      "sha256": "7f79cc08a746d1afbf59b25a25a9f71ae8b979790eaf2ff1dda5b3114e9826f3"
+    },
+    {
+      "path": "assets/models/sydney_regatta/meshes/sydney_regatta_shore.dae",
+      "source": "/home/gzf/.gz/fuel/fuel.gazebosim.org/openrobotics/models/sydney_regatta/3/meshes/sydney_regatta_shore.dae",
+      "bytes": 900857,
+      "sha256": "59eb8247847b33906b44a8f8ad76b6d8bd95b9f0a0fa5f1508960d83601275b1"
+    },
+    {
+      "path": "assets/models/sydney_regatta/materials/textures/Terrain.png",
+      "source": "/home/gzf/.gz/fuel/fuel.gazebosim.org/openrobotics/models/sydney_regatta/3/meshes/../materials/textures/Terrain.png",
+      "bytes": 37158185,
+      "sha256": "bbc337c9af330b88a6fa529cdd91a2734501cda57f8671ef03a126912fc2a2f4"
+    },
+    {
+      "path": "assets/models/sydney_regatta/materials/textures/DockDark.png",
+      "source": "/home/gzf/.gz/fuel/fuel.gazebosim.org/openrobotics/models/sydney_regatta/3/meshes/../materials/textures/DockDark.png",
+      "bytes": 22725141,
+      "sha256": "3d51e976443f3861a04eee7751bf5eb2501f937b1f0470a5ec712ede91ceeb2f"
+    },
+    {
+      "path": "assets/models/sydney_regatta/materials/textures/MetalGalvanized.png",
+      "source": "/home/gzf/.gz/fuel/fuel.gazebosim.org/openrobotics/models/sydney_regatta/3/meshes/../materials/textures/MetalGalvanized.png",
+      "bytes": 18497636,
+      "sha256": "1b7b8f85bbb56f8af5a6b3fce85f095dcb45b9d01cd98b59f1b75af534f3a28d"
+    },
+    {
+      "path": "assets/models/sydney_regatta/materials/textures/Dock.png",
+      "source": "/home/gzf/.gz/fuel/fuel.gazebosim.org/openrobotics/models/sydney_regatta/3/meshes/../materials/textures/Dock.png",
+      "bytes": 23022273,
+      "sha256": "9984d9a2fb335f3b2438c78c1ddb5f3ab9df10970854d20cd95fc8089b74c6f4"
+    },
+    {
+      "path": "assets/models/sydney_regatta/materials/textures/Windows_Dark.png",
+      "source": "/home/gzf/.gz/fuel/fuel.gazebosim.org/openrobotics/models/sydney_regatta/3/meshes/../materials/textures/Windows_Dark.png",
+      "bytes": 359379,
+      "sha256": "028cea95596179caf10233bc4f831a3824183c9c3640d76aa5d4fe451d0b76af"
+    },
+    {
+      "path": "assets/models/sydney_regatta/materials/textures/RoofCorrugated.png",
+      "source": "/home/gzf/.gz/fuel/fuel.gazebosim.org/openrobotics/models/sydney_regatta/3/meshes/../materials/textures/RoofCorrugated.png",
+      "bytes": 20063424,
+      "sha256": "d7e42e3205e45559194abb2b66ffdf1f50cd790ac6408d1d9a2378258576410a"
+    },
+    {
+      "path": "assets/models/sydney_regatta/materials/textures/Wall_05.png",
+      "source": "/home/gzf/.gz/fuel/fuel.gazebosim.org/openrobotics/models/sydney_regatta/3/meshes/../materials/textures/Wall_05.png",
+      "bytes": 1042544,
+      "sha256": "14c98e9ec657f90d5e889bffe68944bbae9226bc5f23f495c0ae223d41263b68"
+    },
+    {
+      "path": "assets/models/sydney_regatta/materials/textures/TreeDiffuse.png",
+      "source": "/home/gzf/.gz/fuel/fuel.gazebosim.org/openrobotics/models/sydney_regatta/3/meshes/../materials/textures/TreeDiffuse.png",
+      "bytes": 1304583,
+      "sha256": "d5315f7b65713fcf1e6f99e0bb09d8b811ed73f96458cf7c8c812af4d2fe07bc"
+    },
+    {
+      "path": "assets/models/mb_round_buoy_orange/model.config",
+      "source": "/home/gzf/.gz/fuel/fuel.gazebosim.org/openrobotics/models/mb_round_buoy_orange/5/model.config",
+      "bytes": 475,
+      "sha256": "fd9ca533357d3fa2bae701050879103745468fa0380286dee4359d5be94a5076"
+    },
+    {
+      "path": "assets/models/mb_round_buoy_orange/model.sdf",
+      "source": "/home/gzf/.gz/fuel/fuel.gazebosim.org/openrobotics/models/mb_round_buoy_orange/5/model.sdf",
+      "bytes": 1437,
+      "sha256": "e9cb8aa0702ab0090d9bc26c2651d2038e932f402a9afae0cb5e0742fb974d85"
+    },
+    {
+      "path": "assets/models/mb_round_buoy_orange/meshes/mb_round_buoy.dae",
+      "source": "/home/gzf/.gz/fuel/fuel.gazebosim.org/openrobotics/models/mb_round_buoy_orange/5/meshes/mb_round_buoy.dae",
+      "bytes": 50843,
+      "sha256": "771586ae29826060885e1856d8995b31c27aa25d24bb1bd31eecf8390d7b79aa"
+    },
+    {
+      "path": "assets/models/mb_round_buoy_orange/materials/textures/RoundBarrierBuoy_Roughness.png",
+      "source": "/home/gzf/.gz/fuel/fuel.gazebosim.org/openrobotics/models/mb_round_buoy_orange/5/materials/textures/RoundBarrierBuoy_Roughness.png",
+      "bytes": 115685,
+      "sha256": "862edbed81ae36d96f4a9458aa275da9a94394086ba3c8e37dca303a8383c9b6"
+    },
+    {
+      "path": "assets/models/mb_round_buoy_orange/materials/textures/RoundBarrierBuoy_Base_Color.png",
+      "source": "/home/gzf/.gz/fuel/fuel.gazebosim.org/openrobotics/models/mb_round_buoy_orange/5/meshes/../materials/textures/RoundBarrierBuoy_Base_Color.png",
+      "bytes": 1940047,
+      "sha256": "0761e6e8bc9c72754c64e831be7d55110fcc64bbe9de0520188851d7743ad08e"
+    },
+    {
+      "path": "assets/models/mb_marker_buoy_red/model.config",
+      "source": "/home/gzf/.gz/fuel/fuel.gazebosim.org/openrobotics/models/mb_marker_buoy_red/5/model.config",
+      "bytes": 474,
+      "sha256": "82f4394e475a9cf553ee30f555c95e4afb50e8f1dbd19efdc8788de4bcd15158"
+    },
+    {
+      "path": "assets/models/mb_marker_buoy_red/model.sdf",
+      "source": "/home/gzf/.gz/fuel/fuel.gazebosim.org/openrobotics/models/mb_marker_buoy_red/5/model.sdf",
+      "bytes": 1921,
+      "sha256": "643fafc2c05058a657f797ea83e2a7a76636f342ded9542ad8f3764aa241c03b"
+    },
+    {
+      "path": "assets/models/mb_marker_buoy_red/meshes/mb_marker_buoy.dae",
+      "source": "/home/gzf/.gz/fuel/fuel.gazebosim.org/openrobotics/models/mb_marker_buoy_red/5/meshes/mb_marker_buoy.dae",
+      "bytes": 72330,
+      "sha256": "51eef99e67e7bd6f6e8f3070d78a403f5b04210563374347a77a48ed2753272d"
+    },
+    {
+      "path": "assets/models/mb_marker_buoy_red/materials/textures/MarkerBuoy_Roughness.png",
+      "source": "/home/gzf/.gz/fuel/fuel.gazebosim.org/openrobotics/models/mb_marker_buoy_red/5/materials/textures/MarkerBuoy_Roughness.png",
+      "bytes": 229977,
+      "sha256": "a72849eb34208ee2d27911422102f6365db629b279e61f572e7a94462d2e56be"
+    },
+    {
+      "path": "assets/models/mb_marker_buoy_red/materials/textures/MarkerBuoy_Base_Color.png",
+      "source": "/home/gzf/.gz/fuel/fuel.gazebosim.org/openrobotics/models/mb_marker_buoy_red/5/meshes/../materials/textures/MarkerBuoy_Base_Color.png",
+      "bytes": 1445393,
+      "sha256": "dbfd0d388074ea58428345deda5e1466ad44ee2c073bb1494904df51cee47e95"
+    },
+    {
+      "path": "assets/models/small_cora_float/model.config",
+      "source": "/home/gzf/robot_ws/small_cora/models/small_cora_float/model.config",
+      "bytes": 228,
+      "sha256": "10762d1c06a68a7211fe0a8753a0ec819635eedf96b2bf14d8b00310b1a216a7"
+    },
+    {
+      "path": "assets/models/small_cora_float/model.sdf",
+      "source": "/home/gzf/robot_ws/small_cora/models/small_cora_float/model.sdf",
+      "bytes": 8640,
+      "sha256": "f3dd1be6f2a257068005dea8d49d713994b4fb36a5832ac057b6cfc57ae3a18b"
+    },
+    {
+      "path": "assets/models/small_cora_float/meshes/hull.stl",
+      "source": "/home/gzf/robot_ws/small_cora/models/small_cora_float/meshes/hull.stl",
+      "bytes": 442284,
+      "sha256": "d40efaabcd401998c628c6bc83d33d0657e0e32d2c45fa963e86321afe65a35e"
+    },
+    {
+      "path": "assets/models/small_cora_float/LICENSE",
+      "source": "/home/gzf/robot_ws/small_cora/models/small_cora_float/LICENSE",
+      "bytes": 11357,
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    },
+    {
+      "path": "assets/models/coast_waves/model.config",
+      "source": "/home/gzf/robot_ws/vrx_ws/src/vrx/vrx_gz/models/coast_waves/model.config",
+      "bytes": 254,
+      "sha256": "3f1eebbfaa2977e506fa7adc3e8f522414380f208e07b8c15ce91113de3a8725"
+    },
+    {
+      "path": "assets/models/coast_waves/model.sdf",
+      "source": "/home/gzf/robot_ws/vrx_ws/src/vrx/vrx_gz/models/coast_waves/model.sdf",
+      "bytes": 1118,
+      "sha256": "7548cc7b6da125951e64d1ded5a3c3e5b26b5cdbd8c963fddbcce2482b8621e4"
+    },
+    {
+      "path": "assets/models/coast_waves/meshes/waterlow.dae",
+      "source": "/home/gzf/robot_ws/vrx_ws/src/vrx/vrx_gz/models/coast_waves/meshes/waterlow.dae",
+      "bytes": 13323357,
+      "sha256": "91e96edd71fde67753adedf6d103b6c803c74011be6ec3cf41202cf963db99b5"
+    },
+    {
+      "path": "assets/models/coast_waves/materials/programs/GerstnerWaves_vs_330.glsl",
+      "source": "/home/gzf/robot_ws/vrx_ws/src/vrx/vrx_gz/models/coast_waves/materials/programs/GerstnerWaves_vs_330.glsl",
+      "bytes": 4097,
+      "sha256": "2b9be7918f3793c0453a9627ff8605c7d030c0157dbfde608905f9ccbd36ad7c"
+    },
+    {
+      "path": "assets/models/coast_waves/materials/programs/GerstnerWaves_fs_330.glsl",
+      "source": "/home/gzf/robot_ws/vrx_ws/src/vrx/vrx_gz/models/coast_waves/materials/programs/GerstnerWaves_fs_330.glsl",
+      "bytes": 2159,
+      "sha256": "83efd5e8b858773f0248512460a5910467abf729983536a1db2f5628cfd56cbd"
+    },
+    {
+      "path": "assets/models/coast_waves/materials/textures/wave_normals.dds",
+      "source": "/home/gzf/robot_ws/vrx_ws/src/vrx/vrx_gz/models/coast_waves/materials/textures/wave_normals.dds",
+      "bytes": 262271,
+      "sha256": "943b5d189997f460ff8d4a35f5259d36809a5c6669a440d99b4f8b5abe0d8e4b"
+    },
+    {
+      "path": "assets/models/coast_waves/materials/textures/skybox_lowres.dds",
+      "source": "/home/gzf/robot_ws/vrx_ws/src/vrx/vrx_gz/models/coast_waves/materials/textures/skybox_lowres.dds",
+      "bytes": 786560,
+      "sha256": "62cbed0ceaa102620bd0857ec8e17b72ca1c7f364870c407cacdbe99c470fc0c"
+    },
+    {
+      "path": "assets/licenses/VRX_APACHE_2_0.txt",
+      "source": "/home/gzf/robot_ws/vrx_ws/src/vrx/LICENSE",
+      "bytes": 10175,
+      "sha256": "e1925845017bf307c7d465af432e8bb20cbb6ce17b10cd323af59da717753075"
+    },
+    {
+      "path": "assets/licenses/CORA_APACHE_2_0.txt",
+      "source": "/home/gzf/robot_ws/small_cora/models/small_cora_float/LICENSE",
+      "bytes": 11357,
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    },
+    {
+      "path": "sim_runtime/lib/libPolyhedraBuoyancyDrag.so",
+      "source": "/home/gzf/robot_ws/vrx_ws/install/lib/libPolyhedraBuoyancyDrag.so",
+      "bytes": 1480904,
+      "sha256": "aef394dc68eb9b2f97c5e3b74c2469b8b8f12047a8f62adbe8da3b9fd8b8f17c"
+    },
+    {
+      "path": "sim_runtime/lib/libWaves.so",
+      "source": "/home/gzf/robot_ws/vrx_ws/install/lib/libWaves.so",
+      "bytes": 748592,
+      "sha256": "cebe4ed2b1cb24c007ce86ca03c5deadd36f515b5c18acf0bbff70f43949689d"
+    },
+    {
+      "path": "sim_runtime/lib/libPublisherPlugin.so",
+      "source": "/home/gzf/robot_ws/vrx_ws/install/lib/libPublisherPlugin.so",
+      "bytes": 793656,
+      "sha256": "572eb81a6e91231ec8be453c938c25f10d2f384dd9591bfe04b6f1c175125b1a"
+    },
+    {
+      "path": "sim_runtime/lib/libWaveVisual.so",
+      "source": "/home/gzf/robot_ws/vrx_ws/install/lib/libWaveVisual.so",
+      "bytes": 1860160,
+      "sha256": "5c5945fbb17c1896b247cf133e17e8759e7bbe85555d6a4e8614ffe46eaef02f"
+    },
+    {
+      "path": "sim_runtime/src/PolyhedraBuoyancyDrag.cc",
+      "source": "/home/gzf/robot_ws/vrx_ws/src/vrx/vrx_gz/src/PolyhedraBuoyancyDrag.cc",
+      "bytes": 12040,
+      "sha256": "f40eb5f4318038409ed9cab9b02cde49b9fe8443cf8ef8c43ff8be8363577d2c"
+    },
+    {
+      "path": "sim_runtime/src/PolyhedraBuoyancyDrag.hh",
+      "source": "/home/gzf/robot_ws/vrx_ws/src/vrx/vrx_gz/src/PolyhedraBuoyancyDrag.hh",
+      "bytes": 4966,
+      "sha256": "75da726651c88984d1bb24db7dc57be2da272102bf678051ed5f248b9cb06238"
+    },
+    {
+      "path": "sim_runtime/src/PolyhedronVolume.cc",
+      "source": "/home/gzf/robot_ws/vrx_ws/src/vrx/vrx_gz/src/PolyhedronVolume.cc",
+      "bytes": 8685,
+      "sha256": "e37e1de59d9a15b0f854233e1281e21372f4bd16e03e4a958c9eb01d7adb419f"
+    },
+    {
+      "path": "sim_runtime/src/PolyhedronVolume.hh",
+      "source": "/home/gzf/robot_ws/vrx_ws/src/vrx/vrx_gz/src/PolyhedronVolume.hh",
+      "bytes": 5583,
+      "sha256": "aca7af758a945f613bb820bb1d15a8ad4d7546cb12854364c894eb3db3887035"
+    },
+    {
+      "path": "sim_runtime/src/ShapeVolume.cc",
+      "source": "/home/gzf/robot_ws/vrx_ws/src/vrx/vrx_gz/src/ShapeVolume.cc",
+      "bytes": 6549,
+      "sha256": "aacece3d836e2f274eda662e793937b9bd8c880b0dd4836fc5c065060e3d78d8"
+    },
+    {
+      "path": "sim_runtime/src/ShapeVolume.hh",
+      "source": "/home/gzf/robot_ws/vrx_ws/src/vrx/vrx_gz/src/ShapeVolume.hh",
+      "bytes": 4618,
+      "sha256": "93757a9f6e17ecb8a062eda57654c1a236cf920e127ff5a5f425ecd0f48cc848"
+    },
+    {
+      "path": "sim_runtime/src/Wavefield.cc",
+      "source": "/home/gzf/robot_ws/vrx_ws/src/vrx/vrx_gz/src/Wavefield.cc",
+      "bytes": 26812,
+      "sha256": "83b0ada735083ed0d9b7b40283710e453d66a715e7d8e54188e35bfe456a016e"
+    },
+    {
+      "path": "sim_runtime/src/Wavefield.hh",
+      "source": "/home/gzf/robot_ws/vrx_ws/src/vrx/vrx_gz/src/Wavefield.hh",
+      "bytes": 11653,
+      "sha256": "9d6e14b1d227bf5e19d16392270de0cc49602b16d7f46e6dedcade6aa3a5d6bf"
+    },
+    {
+      "path": "sim_runtime/src/PublisherPlugin.cc",
+      "source": "/home/gzf/robot_ws/vrx_ws/src/vrx/vrx_gz/src/PublisherPlugin.cc",
+      "bytes": 5381,
+      "sha256": "2c542e19a00582f89125ec98a5aa7d1d428b425cd8d0e1f0670f1f2171df398b"
+    },
+    {
+      "path": "sim_runtime/src/PublisherPlugin.hh",
+      "source": "/home/gzf/robot_ws/vrx_ws/src/vrx/vrx_gz/src/PublisherPlugin.hh",
+      "bytes": 3227,
+      "sha256": "826d4a12b2853840f35e56c97c964cb7cd608f97e1d3ef28dc19496d9ce3281c"
+    },
+    {
+      "path": "sim_runtime/src/WaveVisual.cc",
+      "source": "/home/gzf/robot_ws/vrx_ws/src/vrx/vrx_gz/src/WaveVisual.cc",
+      "bytes": 15228,
+      "sha256": "ea34eed72fa8a86c0775350ba24c78a7906225e4f946ce68e219f704ec0b9016"
+    },
+    {
+      "path": "sim_runtime/src/WaveVisual.hh",
+      "source": "/home/gzf/robot_ws/vrx_ws/src/vrx/vrx_gz/src/WaveVisual.hh",
+      "bytes": 1916,
+      "sha256": "ecf28340341f97cf68eb409c275a619ba8527137ecd4ebd49e18a2bc124ef8fb"
+    },
+    {
+      "path": "sim_runtime/LICENSE",
+      "source": "/home/gzf/robot_ws/vrx_ws/src/vrx/LICENSE",
+      "bytes": 10175,
+      "sha256": "e1925845017bf307c7d465af432e8bb20cbb6ce17b10cd323af59da717753075"
+    }
+  ]
+}

@@ -191,57 +191,10 @@ class ResizeImages(DataTransformFn):
         return data
 
 
-@dataclasses.dataclass(frozen=True)
-class SubsampleActions(DataTransformFn):
-    stride: int
-
-    def __call__(self, data: DataDict) -> DataDict:
-        data["actions"] = data["actions"][:: self.stride]
-        return data
 
 
-@dataclasses.dataclass(frozen=True)
-class DeltaActions(DataTransformFn):
-    """Repacks absolute actions into delta action space."""
-
-    # Boolean mask for the action dimensions to be repacked into delta action space. Length
-    # can be smaller than the actual number of dimensions. If None, this transform is a no-op.
-    # See `make_bool_mask` for more details.
-    mask: Sequence[bool] | None
-
-    def __call__(self, data: DataDict) -> DataDict:
-        if "actions" not in data or self.mask is None:
-            return data
-
-        state, actions = data["state"], data["actions"]
-        mask = np.asarray(self.mask)
-        dims = mask.shape[-1]
-        actions[..., :dims] -= np.expand_dims(np.where(mask, state[..., :dims], 0), axis=-2)
-        data["actions"] = actions
-
-        return data
 
 
-@dataclasses.dataclass(frozen=True)
-class AbsoluteActions(DataTransformFn):
-    """Repacks delta actions into absolute action space."""
-
-    # Boolean mask for the action dimensions to be repacked into absolute action space. Length
-    # can be smaller than the actual number of dimensions. If None, this transform is a no-op.
-    # See `make_bool_mask` for more details.
-    mask: Sequence[bool] | None
-
-    def __call__(self, data: DataDict) -> DataDict:
-        if "actions" not in data or self.mask is None:
-            return data
-
-        state, actions = data["state"], data["actions"]
-        mask = np.asarray(self.mask)
-        dims = mask.shape[-1]
-        actions[..., :dims] += np.expand_dims(np.where(mask, state[..., :dims], 0), axis=-2)
-        data["actions"] = actions
-
-        return data
 
 
 @dataclasses.dataclass(frozen=True)
@@ -266,44 +219,8 @@ class TokenizePrompt(DataTransformFn):
         return {**data, "tokenized_prompt": tokens, "tokenized_prompt_mask": token_masks}
 
 
-@dataclasses.dataclass(frozen=True)
-class TokenizeFASTInputs(DataTransformFn):
-    tokenizer: _tokenizer.FASTTokenizer
-
-    def __call__(self, data: DataDict) -> DataDict:
-        if (prompt := data.pop("prompt", None)) is None:
-            raise ValueError("Prompt is required")
-
-        if not isinstance(prompt, str):
-            prompt = prompt.item()
-
-        state, actions = data["state"], data.get("actions")
-        tokens, token_mask, ar_mask, loss_mask = self.tokenizer.tokenize(prompt, state, actions)
-        return {
-            **data,
-            "tokenized_prompt": tokens,
-            "tokenized_prompt_mask": token_mask,
-            "token_ar_mask": ar_mask,
-            "token_loss_mask": loss_mask,
-        }
 
 
-@dataclasses.dataclass(frozen=True)
-class ExtractFASTActions(DataTransformFn):
-    tokenizer: _tokenizer.FASTTokenizer
-    action_horizon: int
-    action_dim: int
-
-    def __call__(self, data: DataDict) -> DataDict:
-        if "actions" not in data:
-            return data
-        # Model outputs are saved in "actions", but for FAST models they represent tokens.
-        tokens = data.pop("actions")
-        actions = self.tokenizer.extract_actions(tokens.astype(np.int32), self.action_horizon, self.action_dim)
-        return {
-            **data,
-            "actions": actions,
-        }
 
 
 @dataclasses.dataclass(frozen=True)
@@ -329,9 +246,16 @@ class PadStatesAndActions(DataTransformFn):
     """Zero-pads states and actions to the model action dimension."""
 
     model_action_dim: int
+    model_state_dim: int | None = None
 
     def __call__(self, data: DataDict) -> DataDict:
-        data["state"] = pad_to_dim(data["state"], self.model_action_dim, axis=-1)
+        state_dim = self.model_action_dim if self.model_state_dim is None else self.model_state_dim
+        if self.model_state_dim is not None:
+            if data["state"].shape[-1] > state_dim:
+                raise ValueError("State exceeds configured state_dim; refusing to truncate.")
+            if "actions" in data and data["actions"].shape[-1] > self.model_action_dim:
+                raise ValueError("Actions exceed configured action_dim; refusing to truncate.")
+        data["state"] = pad_to_dim(data["state"], state_dim, axis=-1)
         if "actions" in data:
             data["actions"] = pad_to_dim(data["actions"], self.model_action_dim, axis=-1)
         return data

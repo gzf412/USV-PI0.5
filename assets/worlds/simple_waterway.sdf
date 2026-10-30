@@ -1,0 +1,793 @@
+<?xml version='1.0' encoding='utf-8'?>
+<sdf version="1.9">
+  <world name="simple_waterway">
+
+    <physics name="4ms" type="dart">
+      <max_step_size>.01</max_step_size>
+      <real_time_factor>2.0</real_time_factor>
+    </physics>
+
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics">
+    </plugin>
+    <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands">
+    </plugin>
+    <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+      <disable_on_drained_battery>true</disable_on_drained_battery>
+    </plugin>
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster">
+    </plugin>
+    <scene>
+      <sky><time>12</time><clouds><humidity>0.2</humidity></clouds></sky>
+      <grid>false</grid>
+      <ambient>0.75 0.75 0.75 1</ambient>
+      <background>0.8 0.8 0.8</background>
+    </scene>
+
+    
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <world_frame_orientation>ENU</world_frame_orientation>
+      <latitude_deg>-33.724223</latitude_deg>
+      <longitude_deg>150.679736</longitude_deg>
+      <elevation>0.0</elevation>
+      <heading_deg>0.0</heading_deg>
+    </spherical_coordinates>
+
+    <light type="directional" name="sun">
+      <cast_shadows>true</cast_shadows>
+      <pose>0 0 10 0 0 0</pose>
+      <diffuse>0.9 0.9 0.85 1</diffuse>
+      <specular>0.9 0.9 0.85 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>-0.5 0.1 -0.9</direction>
+    </light>
+
+    <include>
+      <name>Coast Waves</name>
+      <pose>0 0 0 0 0 0</pose>
+      <uri>model://coast_waves</uri>
+    <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>85</label></plugin></include>
+
+    
+    <model name="v2_buoy_1">
+        <link name="link">
+            <inertial>
+                <pose>0 0 0 0 0 0</pose>
+                <mass>94.5</mass>
+                <inertia>
+                    <ixx>21.2625</ixx>
+                    <ixy>0</ixy>
+                    <ixz>0</ixz>
+                    <iyy>21.2625</iyy>
+                    <iyz>0</iyz>
+                    <izz>21.2625</izz>
+                </inertia>
+            </inertial>
+            <collision name="collision">
+                <geometry>
+                    <sphere>
+                        <radius>0.75</radius>
+                    </sphere>
+                </geometry>
+            </collision>
+            <visual name="visual">
+                <geometry>
+                    <mesh>
+                        <uri>model://mb_round_buoy_orange/meshes/mb_round_buoy.dae</uri>
+                    <scale>3 3 3</scale></mesh>
+                </geometry>
+                <material>
+                    <ambient>1 0.02 0.02 1</ambient>
+                    <diffuse>1 0.02 0.02 1</diffuse>
+                    <specular>0.08 0.08 0.08 1</specular>
+                    <pbr>
+                        <metal>
+                            <roughness_map>model://mb_round_buoy_orange/materials/textures/RoundBarrierBuoy_Roughness.png</roughness_map>
+                        </metal>
+                    </pbr>
+                </material>
+            </visual>
+        </link>
+    <static>true</static><pose>-519.9365899308862 175.3594213012541 0 0 0 1.436332312998582</pose><plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>1</label></plugin></model>
+<model name="v2_buoy_2">
+        <link name="link">
+            <inertial>
+                <pose>0 0 -0.4 0 0 0</pose>
+                <mass>47.4074</mass>
+                <inertia>
+                    <ixx>9.7596</ixx>
+                    <ixy>0</ixy>
+                    <ixz>0</ixz>
+                    <iyy>9.7596</iyy>
+                    <iyz>0</iyz>
+                    <izz>0.948148</izz>
+                </inertia>
+            </inertial>
+            <collision name="collision_inner">
+                <pose>0 -0.0266667 0.0266667 0 0 0</pose>
+                <geometry>
+                    <cylinder>
+                        <radius>0.2</radius>
+                        <length>1.53333</length>
+                    </cylinder>
+                </geometry>
+            </collision>
+            <collision name="collision_outer">
+                <pose>0 0 -0.4 0 0 0</pose>
+                <geometry>
+                    <cylinder>
+                        <radius>0.433333</radius>
+                        <length>0.133333</length>
+                    </cylinder>
+                </geometry>
+            </collision>
+            <visual name="visual">
+                <pose>0 0 0 1.57079 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <uri>model://mb_marker_buoy_red/meshes/mb_marker_buoy.dae</uri>
+                    <scale>1.33333 1.33333 1.33333</scale></mesh>
+                </geometry>
+                <material>
+                    <ambient>1 0.02 0.02 1</ambient>
+                    <diffuse>1 0.02 0.02 1</diffuse>
+                    <specular>0.08 0.08 0.08 1</specular>
+                    <pbr>
+                        <metal>
+                            <roughness_map>model://mb_marker_buoy_red/materials/textures/MarkerBuoy_Roughness.png</roughness_map>
+                        </metal>
+                    </pbr>
+                </material>
+            </visual>
+        </link>
+    <static>true</static><pose>-531.5660947158673 191.99686193928295 0 0 0 1.436332312998582</pose><plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>2</label></plugin></model>
+<model name="v2_buoy_3">
+        <link name="link">
+            <inertial>
+                <pose>0 0 0 0 0 0</pose>
+                <mass>94.5</mass>
+                <inertia>
+                    <ixx>21.2625</ixx>
+                    <ixy>0</ixy>
+                    <ixz>0</ixz>
+                    <iyy>21.2625</iyy>
+                    <iyz>0</iyz>
+                    <izz>21.2625</izz>
+                </inertia>
+            </inertial>
+            <collision name="collision">
+                <geometry>
+                    <sphere>
+                        <radius>0.75</radius>
+                    </sphere>
+                </geometry>
+            </collision>
+            <visual name="visual">
+                <geometry>
+                    <mesh>
+                        <uri>model://mb_round_buoy_orange/meshes/mb_round_buoy.dae</uri>
+                    <scale>3 3 3</scale></mesh>
+                </geometry>
+                <material>
+                    <ambient>1 0.85 0.02 1</ambient>
+                    <diffuse>1 0.85 0.02 1</diffuse>
+                    <specular>0.08 0.08 0.08 1</specular>
+                    <pbr>
+                        <metal>
+                            <roughness_map>model://mb_round_buoy_orange/materials/textures/RoundBarrierBuoy_Roughness.png</roughness_map>
+                        </metal>
+                    </pbr>
+                </material>
+            </visual>
+        </link>
+    <static>true</static><pose>-535.7705920315483 187.72513626264444 0 0 0 1.436332312998582</pose><plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>3</label></plugin></model>
+<model name="v2_buoy_4">
+        <link name="link">
+            <inertial>
+                <pose>0 0 -0.4 0 0 0</pose>
+                <mass>47.4074</mass>
+                <inertia>
+                    <ixx>9.7596</ixx>
+                    <ixy>0</ixy>
+                    <ixz>0</ixz>
+                    <iyy>9.7596</iyy>
+                    <iyz>0</iyz>
+                    <izz>0.948148</izz>
+                </inertia>
+            </inertial>
+            <collision name="collision_inner">
+                <pose>0 -0.0266667 0.0266667 0 0 0</pose>
+                <geometry>
+                    <cylinder>
+                        <radius>0.2</radius>
+                        <length>1.53333</length>
+                    </cylinder>
+                </geometry>
+            </collision>
+            <collision name="collision_outer">
+                <pose>0 0 -0.4 0 0 0</pose>
+                <geometry>
+                    <cylinder>
+                        <radius>0.433333</radius>
+                        <length>0.133333</length>
+                    </cylinder>
+                </geometry>
+            </collision>
+            <visual name="visual">
+                <pose>0 0 0 1.57079 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <uri>model://mb_marker_buoy_red/meshes/mb_marker_buoy.dae</uri>
+                    <scale>1.33333 1.33333 1.33333</scale></mesh>
+                </geometry>
+                <material>
+                    <ambient>1 0.85 0.02 1</ambient>
+                    <diffuse>1 0.85 0.02 1</diffuse>
+                    <specular>0.08 0.08 0.08 1</specular>
+                    <pbr>
+                        <metal>
+                            <roughness_map>model://mb_marker_buoy_red/materials/textures/MarkerBuoy_Roughness.png</roughness_map>
+                        </metal>
+                    </pbr>
+                </material>
+            </visual>
+        </link>
+    <static>true</static><pose>-520.0455318239741 180.46864073580903 0 0 0 1.436332312998582</pose><plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>4</label></plugin></model>
+<model name="v2_buoy_5">
+        <link name="link">
+            <inertial>
+                <pose>0 0 0 0 0 0</pose>
+                <mass>94.5</mass>
+                <inertia>
+                    <ixx>21.2625</ixx>
+                    <ixy>0</ixy>
+                    <ixz>0</ixz>
+                    <iyy>21.2625</iyy>
+                    <iyz>0</iyz>
+                    <izz>21.2625</izz>
+                </inertia>
+            </inertial>
+            <collision name="collision">
+                <geometry>
+                    <sphere>
+                        <radius>0.75</radius>
+                    </sphere>
+                </geometry>
+            </collision>
+            <visual name="visual">
+                <geometry>
+                    <mesh>
+                        <uri>model://mb_round_buoy_orange/meshes/mb_round_buoy.dae</uri>
+                    <scale>3 3 3</scale></mesh>
+                </geometry>
+                <material>
+                    <ambient>0.02 0.75 0.08 1</ambient>
+                    <diffuse>0.02 0.75 0.08 1</diffuse>
+                    <specular>0.08 0.08 0.08 1</specular>
+                    <pbr>
+                        <metal>
+                            <roughness_map>model://mb_round_buoy_orange/materials/textures/RoundBarrierBuoy_Roughness.png</roughness_map>
+                        </metal>
+                    </pbr>
+                </material>
+            </visual>
+        </link>
+    <static>true</static><pose>-521.529816047925 185.79863962519102 0 0 0 1.436332312998582</pose><plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>5</label></plugin></model>
+<model name="v2_buoy_6">
+        <link name="link">
+            <inertial>
+                <pose>0 0 -0.4 0 0 0</pose>
+                <mass>47.4074</mass>
+                <inertia>
+                    <ixx>9.7596</ixx>
+                    <ixy>0</ixy>
+                    <ixz>0</ixz>
+                    <iyy>9.7596</iyy>
+                    <iyz>0</iyz>
+                    <izz>0.948148</izz>
+                </inertia>
+            </inertial>
+            <collision name="collision_inner">
+                <pose>0 -0.0266667 0.0266667 0 0 0</pose>
+                <geometry>
+                    <cylinder>
+                        <radius>0.2</radius>
+                        <length>1.53333</length>
+                    </cylinder>
+                </geometry>
+            </collision>
+            <collision name="collision_outer">
+                <pose>0 0 -0.4 0 0 0</pose>
+                <geometry>
+                    <cylinder>
+                        <radius>0.433333</radius>
+                        <length>0.133333</length>
+                    </cylinder>
+                </geometry>
+            </collision>
+            <visual name="visual">
+                <pose>0 0 0 1.57079 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <uri>model://mb_marker_buoy_red/meshes/mb_marker_buoy.dae</uri>
+                    <scale>1.33333 1.33333 1.33333</scale></mesh>
+                </geometry>
+                <material>
+                    <ambient>0.02 0.75 0.08 1</ambient>
+                    <diffuse>0.02 0.75 0.08 1</diffuse>
+                    <specular>0.08 0.08 0.08 1</specular>
+                    <pbr>
+                        <metal>
+                            <roughness_map>model://mb_marker_buoy_red/materials/textures/MarkerBuoy_Roughness.png</roughness_map>
+                        </metal>
+                    </pbr>
+                </material>
+            </visual>
+        </link>
+    <static>true</static><pose>-538.6176963788648 182.9810889764368 0 0 0 1.436332312998582</pose><plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>6</label></plugin></model>
+<model name="v2_buoy_7">
+        <link name="link">
+            <inertial>
+                <pose>0 0 0 0 0 0</pose>
+                <mass>94.5</mass>
+                <inertia>
+                    <ixx>21.2625</ixx>
+                    <ixy>0</ixy>
+                    <ixz>0</ixz>
+                    <iyy>21.2625</iyy>
+                    <iyz>0</iyz>
+                    <izz>21.2625</izz>
+                </inertia>
+            </inertial>
+            <collision name="collision">
+                <geometry>
+                    <sphere>
+                        <radius>0.75</radius>
+                    </sphere>
+                </geometry>
+            </collision>
+            <visual name="visual">
+                <geometry>
+                    <mesh>
+                        <uri>model://mb_round_buoy_orange/meshes/mb_round_buoy.dae</uri>
+                    <scale>3 3 3</scale></mesh>
+                </geometry>
+                <material>
+                    <ambient>0.02 0.1 1 1</ambient>
+                    <diffuse>0.02 0.1 1 1</diffuse>
+                    <specular>0.08 0.08 0.08 1</specular>
+                    <pbr>
+                        <metal>
+                            <roughness_map>model://mb_round_buoy_orange/materials/textures/RoundBarrierBuoy_Roughness.png</roughness_map>
+                        </metal>
+                    </pbr>
+                </material>
+            </visual>
+        </link>
+    <static>true</static><pose>-540.0802326346966 178.08445959829504 0 0 0 1.436332312998582</pose><plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>7</label></plugin></model>
+<model name="v2_buoy_8">
+        <link name="link">
+            <inertial>
+                <pose>0 0 -0.4 0 0 0</pose>
+                <mass>47.4074</mass>
+                <inertia>
+                    <ixx>9.7596</ixx>
+                    <ixy>0</ixy>
+                    <ixz>0</ixz>
+                    <iyy>9.7596</iyy>
+                    <iyz>0</iyz>
+                    <izz>0.948148</izz>
+                </inertia>
+            </inertial>
+            <collision name="collision_inner">
+                <pose>0 -0.0266667 0.0266667 0 0 0</pose>
+                <geometry>
+                    <cylinder>
+                        <radius>0.2</radius>
+                        <length>1.53333</length>
+                    </cylinder>
+                </geometry>
+            </collision>
+            <collision name="collision_outer">
+                <pose>0 0 -0.4 0 0 0</pose>
+                <geometry>
+                    <cylinder>
+                        <radius>0.433333</radius>
+                        <length>0.133333</length>
+                    </cylinder>
+                </geometry>
+            </collision>
+            <visual name="visual">
+                <pose>0 0 0 1.57079 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <uri>model://mb_marker_buoy_red/meshes/mb_marker_buoy.dae</uri>
+                    <scale>1.33333 1.33333 1.33333</scale></mesh>
+                </geometry>
+                <material>
+                    <ambient>0.02 0.1 1 1</ambient>
+                    <diffuse>0.02 0.1 1 1</diffuse>
+                    <specular>0.08 0.08 0.08 1</specular>
+                    <pbr>
+                        <metal>
+                            <roughness_map>model://mb_marker_buoy_red/materials/textures/MarkerBuoy_Roughness.png</roughness_map>
+                        </metal>
+                    </pbr>
+                </material>
+            </visual>
+        </link>
+    <static>true</static><pose>-524.4481984524932 191.03395070236004 0 0 0 1.436332312998582</pose><plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>8</label></plugin></model>
+<model name="sydneyregatta">
+        <pose>0 0 0.2 0 0 0 </pose>
+        <static>true</static>
+        <link name="link">
+            <visual name="visual_terrain">
+                <geometry>
+                    <mesh>
+                        <uri>model://sydney_regatta/meshes/sydney_regatta.dae</uri>
+                        <submesh>
+                            <name>Terrain</name>
+                        </submesh>
+                    </mesh>
+                </geometry>
+            <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>80</label></plugin></visual>
+            <visual name="visual_dock_dark">
+                <geometry>
+                    <mesh>
+                        <uri>model://sydney_regatta/meshes/sydney_regatta.dae</uri>
+                        <submesh>
+                            <name>DockDark</name>
+                        </submesh>
+                    </mesh>
+                </geometry>
+            <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>82</label></plugin></visual>
+            <visual name="visual_metal_galvanized">
+                <geometry>
+                    <mesh>
+                        <uri>model://sydney_regatta/meshes/sydney_regatta.dae</uri>
+                        <submesh>
+                            <name>MetalGalvanized</name>
+                        </submesh>
+                    </mesh>
+                </geometry>
+            <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>82</label></plugin></visual>
+            <visual name="visual_dock">
+                <geometry>
+                    <mesh>
+                        <uri>model://sydney_regatta/meshes/sydney_regatta.dae</uri>
+                        <submesh>
+                            <name>Dock</name>
+                        </submesh>
+                    </mesh>
+                </geometry>
+            <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>82</label></plugin></visual>
+            <visual name="visual_windows_dark">
+                <geometry>
+                    <mesh>
+                        <uri>model://sydney_regatta/meshes/sydney_regatta.dae</uri>
+                        <submesh>
+                            <name>Windows_Dark</name>
+                        </submesh>
+                    </mesh>
+                </geometry>
+            <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>83</label></plugin></visual>
+            <visual name="visual_roof">
+                <geometry>
+                    <mesh>
+                        <uri>model://sydney_regatta/meshes/sydney_regatta.dae</uri>
+                        <submesh>
+                            <name>RoofCorrugated</name>
+                        </submesh>
+                    </mesh>
+                </geometry>
+            <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>83</label></plugin></visual>
+            <visual name="visual_wall">
+                <geometry>
+                    <mesh>
+                        <uri>model://sydney_regatta/meshes/sydney_regatta.dae</uri>
+                        <submesh>
+                            <name>Wall</name>
+                        </submesh>
+                    </mesh>
+                </geometry>
+            <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>83</label></plugin></visual>
+            <visual name="visual_branches">
+                <geometry>
+                    <mesh>
+                        <uri>model://sydney_regatta/meshes/sydney_regatta.dae</uri>
+                        <submesh>
+                            <name>TreeDiffuse</name>
+                        </submesh>
+                    </mesh>
+                </geometry>
+                <material>
+                    <diffuse>1.0 1.0 1.0 1</diffuse>
+                    <pbr>
+                        <metal>
+                            <albedo_map>model://sydney_regatta/materials/textures/TreeDiffuse.png</albedo_map>
+                        </metal>
+                    </pbr>
+                </material>
+            <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>81</label></plugin></visual>
+            <collision name="collision">
+                <geometry>
+                    <mesh>
+                        <uri>model://sydney_regatta/meshes/sydney_regatta_shore.dae</uri>
+                    </mesh>
+                </geometry>
+            </collision>
+        </link>
+    </model>
+<plugin filename="libPublisherPlugin.so" name="vrx::PublisherPlugin">
+      <message type="gz.msgs.Param" topic="/vrx/wavefield/parameters" every=".5">params { key: "direction" value { type: DOUBLE double_value: 0.7 } }
+params { key: "gain" value { type: DOUBLE double_value: 0.0 } }
+params { key: "period" value { type: DOUBLE double_value: 4.5 } }
+params { key: "steepness" value { type: DOUBLE double_value: 0 } }</message>
+    </plugin>
+
+  <gui fullscreen="0">
+
+      
+      <plugin filename="MinimalScene" name="3D View">
+        <gz-gui>
+          <title>3D View</title>
+          <property type="bool" key="showTitleBar">false</property>
+          <property type="string" key="state">docked</property>
+        </gz-gui>
+
+        <engine>ogre2</engine>
+        <scene>scene</scene>
+        <ambient_light>0.4 0.4 0.4</ambient_light>
+        <background_color>0.8 0.8 0.8</background_color>
+        <camera_pose>-534 148 10 0 .23 1.436332312998582</camera_pose>
+        <camera_clip>
+          <near>0.01</near>
+          <far>10000</far>
+        </camera_clip>
+      </plugin>
+
+      
+      <plugin filename="EntityContextMenuPlugin" name="Entity context menu">
+        <gz-gui>
+          <property key="state" type="string">floating</property>
+          <property key="width" type="double">5</property>
+          <property key="height" type="double">5</property>
+          <property key="showTitleBar" type="bool">false</property>
+        </gz-gui>
+      </plugin>
+      <plugin filename="GzSceneManager" name="Scene Manager">
+        <gz-gui>
+          <property key="resizable" type="bool">false</property>
+          <property key="width" type="double">5</property>
+          <property key="height" type="double">5</property>
+          <property key="state" type="string">floating</property>
+          <property key="showTitleBar" type="bool">false</property>
+        </gz-gui>
+      </plugin>
+      <plugin filename="InteractiveViewControl" name="Interactive view control">
+        <gz-gui>
+          <property key="resizable" type="bool">false</property>
+          <property key="width" type="double">5</property>
+          <property key="height" type="double">5</property>
+          <property key="state" type="string">floating</property>
+          <property key="showTitleBar" type="bool">false</property>
+        </gz-gui>
+      </plugin>
+      <plugin filename="CameraTracking" name="Camera Tracking">
+        <gz-gui>
+          <property key="resizable" type="bool">false</property>
+          <property key="width" type="double">5</property>
+          <property key="height" type="double">5</property>
+          <property key="state" type="string">floating</property>
+          <property key="showTitleBar" type="bool">false</property>
+        </gz-gui>
+      </plugin>
+      <plugin filename="MarkerManager" name="Marker manager">
+        <gz-gui>
+          <property key="resizable" type="bool">false</property>
+          <property key="width" type="double">5</property>
+          <property key="height" type="double">5</property>
+          <property key="state" type="string">floating</property>
+          <property key="showTitleBar" type="bool">false</property>
+        </gz-gui>
+      </plugin>
+      <plugin filename="SelectEntities" name="Select Entities">
+        <gz-gui>
+          <anchors target="Select entities">
+            <line own="right" target="right" />
+            <line own="top" target="top" />
+          </anchors>
+          <property key="resizable" type="bool">false</property>
+          <property key="width" type="double">5</property>
+          <property key="height" type="double">5</property>
+          <property key="state" type="string">floating</property>
+          <property key="showTitleBar" type="bool">false</property>
+        </gz-gui>
+      </plugin>
+      <plugin filename="VisualizationCapabilities" name="Visualization Capabilities">
+        <gz-gui>
+          <property key="resizable" type="bool">false</property>
+          <property key="width" type="double">5</property>
+          <property key="height" type="double">5</property>
+          <property key="state" type="string">floating</property>
+          <property key="showTitleBar" type="bool">false</property>
+        </gz-gui>
+      </plugin>
+
+      <plugin filename="Spawn" name="Spawn Entities">
+        <gz-gui>
+          <anchors target="Select entities">
+            <line own="right" target="right" />
+            <line own="top" target="top" />
+          </anchors>
+          <property key="resizable" type="bool">false</property>
+          <property key="width" type="double">5</property>
+          <property key="height" type="double">5</property>
+          <property key="state" type="string">floating</property>
+          <property key="showTitleBar" type="bool">false</property>
+        </gz-gui>
+      </plugin>
+
+      
+      <plugin filename="WorldControl" name="World control">
+        <gz-gui>
+          <title>World control</title>
+          <property type="bool" key="showTitleBar">false</property>
+          <property type="bool" key="resizable">false</property>
+          <property type="double" key="height">72</property>
+          <property type="double" key="width">121</property>
+          <property type="double" key="z">1</property>
+
+          <property type="string" key="state">floating</property>
+          <anchors target="3D View">
+            <line own="left" target="left" />
+            <line own="bottom" target="bottom" />
+          </anchors>
+        </gz-gui>
+
+        <play_pause>true</play_pause>
+        <step>true</step>
+        <start_paused>true</start_paused>
+        <use_event>true</use_event>
+
+      </plugin>
+
+      
+      <plugin filename="WorldStats" name="World stats">
+        <gz-gui>
+          <title>World stats</title>
+          <property type="bool" key="showTitleBar">false</property>
+          <property type="bool" key="resizable">false</property>
+          <property type="double" key="height">110</property>
+          <property type="double" key="width">290</property>
+          <property type="double" key="z">1</property>
+
+          <property type="string" key="state">floating</property>
+          <anchors target="3D View">
+            <line own="right" target="right" />
+            <line own="bottom" target="bottom" />
+          </anchors>
+        </gz-gui>
+
+        <sim_time>true</sim_time>
+        <real_time>true</real_time>
+        <real_time_factor>true</real_time_factor>
+        <iterations>true</iterations>
+      </plugin>
+
+      
+      <plugin filename="Shapes" name="Shapes">
+        <gz-gui>
+          <property key="resizable" type="bool">false</property>
+          <property key="x" type="double">0</property>
+          <property key="y" type="double">0</property>
+          <property key="width" type="double">250</property>
+          <property key="height" type="double">50</property>
+          <property key="state" type="string">floating</property>
+          <property key="showTitleBar" type="bool">false</property>
+          <property key="cardBackground" type="string">#666666</property>
+        </gz-gui>
+      </plugin>
+
+      
+      <plugin filename="Lights" name="Lights">
+        <gz-gui>
+          <property key="resizable" type="bool">false</property>
+          <property key="x" type="double">250</property>
+          <property key="y" type="double">0</property>
+          <property key="width" type="double">150</property>
+          <property key="height" type="double">50</property>
+          <property key="state" type="string">floating</property>
+          <property key="showTitleBar" type="bool">false</property>
+          <property key="cardBackground" type="string">#666666</property>
+        </gz-gui>
+      </plugin>
+
+      
+      <plugin filename="TransformControl" name="Transform control">
+        <gz-gui>
+          <property key="resizable" type="bool">false</property>
+          <property key="x" type="double">0</property>
+          <property key="y" type="double">50</property>
+          <property key="width" type="double">250</property>
+          <property key="height" type="double">50</property>
+          <property key="state" type="string">floating</property>
+          <property key="showTitleBar" type="bool">false</property>
+          <property key="cardBackground" type="string">#777777</property>
+        </gz-gui>
+
+        
+        <legacy>false</legacy>
+      </plugin>
+
+      
+      <plugin filename="Screenshot" name="Screenshot">
+        <gz-gui>
+          <property key="resizable" type="bool">false</property>
+          <property key="x" type="double">250</property>
+          <property key="y" type="double">50</property>
+          <property key="width" type="double">50</property>
+          <property key="height" type="double">50</property>
+          <property key="state" type="string">floating</property>
+          <property key="showTitleBar" type="bool">false</property>
+          <property key="cardBackground" type="string">#777777</property>
+        </gz-gui>
+      </plugin>
+
+      
+      <plugin filename="VideoRecorder" name="VideoRecorder">
+        <gz-gui>
+          <property key="resizable" type="bool">false</property>
+          <property key="x" type="double">300</property>
+          <property key="y" type="double">50</property>
+          <property key="width" type="double">50</property>
+          <property key="height" type="double">50</property>
+          <property key="state" type="string">floating</property>
+          <property key="showTitleBar" type="bool">false</property>
+          <property key="cardBackground" type="string">#777777</property>
+        </gz-gui>
+
+        <record_video>
+          <use_sim_time>true</use_sim_time>
+          <lockstep>true</lockstep>
+          <bitrate>4000000</bitrate>
+        </record_video>
+
+        
+        <legacy>false</legacy>
+      </plugin>
+
+      
+      <plugin filename="ComponentInspector" name="Component inspector">
+        <gz-gui>
+          <property type="string" key="state">docked_collapsed</property>
+        </gz-gui>
+      </plugin>
+
+      
+      <plugin filename="EntityTree" name="Entity tree">
+        <gz-gui>
+          <property type="string" key="state">docked_collapsed</property>
+        </gz-gui>
+      </plugin>
+
+      
+      <plugin filename="ViewAngle" name="View angle">
+        <gz-gui>
+          <property type="string" key="state">docked_collapsed</property>
+        </gz-gui>
+
+        
+        <legacy>false</legacy>
+      </plugin>
+
+    </gui>
+
+    <model name="simple_cylinder_1"><static>true</static><pose>-525.3039249758841 170.72711746634658 0 0 0 1.436332312998582</pose><link name="link"><visual name="barrel"><pose>0 0 0.22 0 0 0</pose><geometry><cylinder><radius>.40</radius><length>.9</length></cylinder></geometry><material><ambient>1 0.35 0.02 1</ambient><diffuse>1 0.35 0.02 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><visual name="band_0"><pose>0 0 0 0 0 0</pose><geometry><cylinder><radius>.405</radius><length>.06</length></cylinder></geometry><material><ambient>0.12 0.12 0.12 1</ambient><diffuse>0.12 0.12 0.12 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual><visual name="band_0.38"><pose>0 0 0.38 0 0 0</pose><geometry><cylinder><radius>.405</radius><length>.06</length></cylinder></geometry><material><ambient>0.12 0.12 0.12 1</ambient><diffuse>0.12 0.12 0.12 1</diffuse><specular>0.1 0.1 0.1 1</specular></material></visual></link><plugin filename="gz-sim-label-system" name="gz::sim::systems::Label"><label>33</label></plugin></model></world>
+</sdf>

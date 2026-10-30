@@ -62,10 +62,11 @@ class PaliGemmaWeightLoader(WeightLoader):
     This allows us to support the action expert which is used by the Pi0 model.
     """
 
+    # A downloaded official JAX NPZ can be supplied without network access.
+    weights_path: str = "gs://vertex-model-garden-paligemma-us/paligemma/pt_224.npz"
+
     def load(self, params: at.Params) -> at.Params:
-        path = download.maybe_download(
-            "gs://vertex-model-garden-paligemma-us/paligemma/pt_224.npz", gs={"token": "anon"}
-        )
+        path = download.maybe_download(self.weights_path, gs={"token": "anon"})
         with path.open("rb") as f:
             flat_params = dict(np.load(f, allow_pickle=False))
         loaded_params = {"PaliGemma": flax.traverse_util.unflatten_dict(flat_params, sep="/")["params"]}

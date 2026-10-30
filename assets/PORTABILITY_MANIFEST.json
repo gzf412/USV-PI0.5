@@ -1,0 +1,270 @@
+{
+  "files": [
+    {
+      "path": "assets/models/coast_waves/materials/programs/GerstnerWaves_fs_330.glsl",
+      "bytes": 2159,
+      "sha256": "83efd5e8b858773f0248512460a5910467abf729983536a1db2f5628cfd56cbd"
+    },
+    {
+      "path": "assets/models/coast_waves/materials/programs/GerstnerWaves_vs_330.glsl",
+      "bytes": 4097,
+      "sha256": "2b9be7918f3793c0453a9627ff8605c7d030c0157dbfde608905f9ccbd36ad7c"
+    },
+    {
+      "path": "assets/models/coast_waves/materials/textures/skybox_lowres.dds",
+      "bytes": 786560,
+      "sha256": "62cbed0ceaa102620bd0857ec8e17b72ca1c7f364870c407cacdbe99c470fc0c"
+    },
+    {
+      "path": "assets/models/coast_waves/materials/textures/wave_normals.dds",
+      "bytes": 262271,
+      "sha256": "943b5d189997f460ff8d4a35f5259d36809a5c6669a440d99b4f8b5abe0d8e4b"
+    },
+    {
+      "path": "assets/models/coast_waves/meshes/waterlow.dae",
+      "bytes": 13323357,
+      "sha256": "91e96edd71fde67753adedf6d103b6c803c74011be6ec3cf41202cf963db99b5"
+    },
+    {
+      "path": "assets/models/coast_waves/model.config",
+      "bytes": 254,
+      "sha256": "3f1eebbfaa2977e506fa7adc3e8f522414380f208e07b8c15ce91113de3a8725"
+    },
+    {
+      "path": "assets/models/coast_waves/model.sdf",
+      "bytes": 1153,
+      "sha256": "e6ccf2fc9647f65a39ccb451d079ba2d119eb346f1c7e08c362c5d64d914d05e"
+    },
+    {
+      "path": "assets/models/mb_marker_buoy_red/materials/textures/MarkerBuoy_Base_Color.png",
+      "bytes": 1445393,
+      "sha256": "dbfd0d388074ea58428345deda5e1466ad44ee2c073bb1494904df51cee47e95"
+    },
+    {
+      "path": "assets/models/mb_marker_buoy_red/materials/textures/MarkerBuoy_Roughness.png",
+      "bytes": 229977,
+      "sha256": "a72849eb34208ee2d27911422102f6365db629b279e61f572e7a94462d2e56be"
+    },
+    {
+      "path": "assets/models/mb_marker_buoy_red/meshes/mb_marker_buoy.dae",
+      "bytes": 72330,
+      "sha256": "51eef99e67e7bd6f6e8f3070d78a403f5b04210563374347a77a48ed2753272d"
+    },
+    {
+      "path": "assets/models/mb_marker_buoy_red/model.config",
+      "bytes": 474,
+      "sha256": "82f4394e475a9cf553ee30f555c95e4afb50e8f1dbd19efdc8788de4bcd15158"
+    },
+    {
+      "path": "assets/models/mb_marker_buoy_red/model.sdf",
+      "bytes": 1921,
+      "sha256": "643fafc2c05058a657f797ea83e2a7a76636f342ded9542ad8f3764aa241c03b"
+    },
+    {
+      "path": "assets/models/mb_round_buoy_orange/materials/textures/RoundBarrierBuoy_Base_Color.png",
+      "bytes": 1940047,
+      "sha256": "0761e6e8bc9c72754c64e831be7d55110fcc64bbe9de0520188851d7743ad08e"
+    },
+    {
+      "path": "assets/models/mb_round_buoy_orange/materials/textures/RoundBarrierBuoy_Roughness.png",
+      "bytes": 115685,
+      "sha256": "862edbed81ae36d96f4a9458aa275da9a94394086ba3c8e37dca303a8383c9b6"
+    },
+    {
+      "path": "assets/models/mb_round_buoy_orange/meshes/mb_round_buoy.dae",
+      "bytes": 50843,
+      "sha256": "771586ae29826060885e1856d8995b31c27aa25d24bb1bd31eecf8390d7b79aa"
+    },
+    {
+      "path": "assets/models/mb_round_buoy_orange/model.config",
+      "bytes": 475,
+      "sha256": "fd9ca533357d3fa2bae701050879103745468fa0380286dee4359d5be94a5076"
+    },
+    {
+      "path": "assets/models/mb_round_buoy_orange/model.sdf",
+      "bytes": 1437,
+      "sha256": "e9cb8aa0702ab0090d9bc26c2651d2038e932f402a9afae0cb5e0742fb974d85"
+    },
+    {
+      "path": "assets/models/small_cora_float/LICENSE",
+      "bytes": 11357,
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    },
+    {
+      "path": "assets/models/small_cora_float/meshes/hull.stl",
+      "bytes": 442284,
+      "sha256": "d40efaabcd401998c628c6bc83d33d0657e0e32d2c45fa963e86321afe65a35e"
+    },
+    {
+      "path": "assets/models/small_cora_float/model.config",
+      "bytes": 228,
+      "sha256": "10762d1c06a68a7211fe0a8753a0ec819635eedf96b2bf14d8b00310b1a216a7"
+    },
+    {
+      "path": "assets/models/small_cora_float/model.sdf",
+      "bytes": 7844,
+      "sha256": "0f93f4b589310574143b4a4bc6bab55e7c0bc55e3754e8d735d6769a00fb5a20"
+    },
+    {
+      "path": "assets/models/sydney_regatta/materials/textures/Dock.png",
+      "bytes": 23022273,
+      "sha256": "9984d9a2fb335f3b2438c78c1ddb5f3ab9df10970854d20cd95fc8089b74c6f4"
+    },
+    {
+      "path": "assets/models/sydney_regatta/materials/textures/DockDark.png",
+      "bytes": 22725141,
+      "sha256": "3d51e976443f3861a04eee7751bf5eb2501f937b1f0470a5ec712ede91ceeb2f"
+    },
+    {
+      "path": "assets/models/sydney_regatta/materials/textures/MetalGalvanized.png",
+      "bytes": 18497636,
+      "sha256": "1b7b8f85bbb56f8af5a6b3fce85f095dcb45b9d01cd98b59f1b75af534f3a28d"
+    },
+    {
+      "path": "assets/models/sydney_regatta/materials/textures/RoofCorrugated.png",
+      "bytes": 20063424,
+      "sha256": "d7e42e3205e45559194abb2b66ffdf1f50cd790ac6408d1d9a2378258576410a"
+    },
+    {
+      "path": "assets/models/sydney_regatta/materials/textures/Terrain.png",
+      "bytes": 37158185,
+      "sha256": "bbc337c9af330b88a6fa529cdd91a2734501cda57f8671ef03a126912fc2a2f4"
+    },
+    {
+      "path": "assets/models/sydney_regatta/materials/textures/TreeDiffuse.png",
+      "bytes": 1304583,
+      "sha256": "d5315f7b65713fcf1e6f99e0bb09d8b811ed73f96458cf7c8c812af4d2fe07bc"
+    },
+    {
+      "path": "assets/models/sydney_regatta/materials/textures/Wall_05.png",
+      "bytes": 1042544,
+      "sha256": "14c98e9ec657f90d5e889bffe68944bbae9226bc5f23f495c0ae223d41263b68"
+    },
+    {
+      "path": "assets/models/sydney_regatta/materials/textures/Windows_Dark.png",
+      "bytes": 359379,
+      "sha256": "028cea95596179caf10233bc4f831a3824183c9c3640d76aa5d4fe451d0b76af"
+    },
+    {
+      "path": "assets/models/sydney_regatta/meshes/sydney_regatta.dae",
+      "bytes": 17636894,
+      "sha256": "7f79cc08a746d1afbf59b25a25a9f71ae8b979790eaf2ff1dda5b3114e9826f3"
+    },
+    {
+      "path": "assets/models/sydney_regatta/meshes/sydney_regatta_shore.dae",
+      "bytes": 900857,
+      "sha256": "59eb8247847b33906b44a8f8ad76b6d8bd95b9f0a0fa5f1508960d83601275b1"
+    },
+    {
+      "path": "assets/models/sydney_regatta/model.config",
+      "bytes": 407,
+      "sha256": "be71ec14038d44f3a26413dec2791ed22e18e4ac18c4afb2d65ae50f6c3982f2"
+    },
+    {
+      "path": "assets/models/sydney_regatta/model.sdf",
+      "bytes": 3634,
+      "sha256": "d26f2ae8c6c5ee81d721e5310d739ecd0e766ffd134686f107fd38cb28dd7a02"
+    },
+    {
+      "path": "assets/worlds/sensor_systems.sdf",
+      "bytes": 371,
+      "sha256": "670a67451bff2806d2f2664e3b71455718d0d4ae96e9314882103d7209288efd"
+    },
+    {
+      "path": "assets/worlds/simple_waterway.sdf",
+      "bytes": 33251,
+      "sha256": "1cea9bad125ecce76a66c136d559725be0e071501a644c0c2fcd4c3995dd9850"
+    },
+    {
+      "path": "assets/licenses/CORA_APACHE_2_0.txt",
+      "bytes": 11357,
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    },
+    {
+      "path": "assets/licenses/VRX_APACHE_2_0.txt",
+      "bytes": 10175,
+      "sha256": "e1925845017bf307c7d465af432e8bb20cbb6ce17b10cd323af59da717753075"
+    },
+    {
+      "path": "sim_runtime/lib/libPolyhedraBuoyancyDrag.so",
+      "bytes": 269776,
+      "sha256": "fe8c9bda9c98bdedb7f26e16070ef24cb3254708c8351993d00f0c3950129d45"
+    },
+    {
+      "path": "sim_runtime/lib/libPublisherPlugin.so",
+      "bytes": 134304,
+      "sha256": "0946421d0b927bec11c2efcd6279a3d97f13a3d5d8964dd1ccc047f49a060273"
+    },
+    {
+      "path": "sim_runtime/lib/libWaveVisual.so",
+      "bytes": 278184,
+      "sha256": "4543900a6b97b65d217b86a414dba098d6d26ad2fe084ca7f0361bf6bab402f3"
+    },
+    {
+      "path": "sim_runtime/lib/libWaves.so",
+      "bytes": 140024,
+      "sha256": "ba4a0cd5a9dbed3714fa3dd72d4ddc12dde5fcbfe27df90ca3a95575ba325952"
+    },
+    {
+      "path": "sim_runtime/src/PolyhedraBuoyancyDrag.cc",
+      "bytes": 12040,
+      "sha256": "f40eb5f4318038409ed9cab9b02cde49b9fe8443cf8ef8c43ff8be8363577d2c"
+    },
+    {
+      "path": "sim_runtime/src/PolyhedraBuoyancyDrag.hh",
+      "bytes": 4966,
+      "sha256": "75da726651c88984d1bb24db7dc57be2da272102bf678051ed5f248b9cb06238"
+    },
+    {
+      "path": "sim_runtime/src/PolyhedronVolume.cc",
+      "bytes": 8685,
+      "sha256": "e37e1de59d9a15b0f854233e1281e21372f4bd16e03e4a958c9eb01d7adb419f"
+    },
+    {
+      "path": "sim_runtime/src/PolyhedronVolume.hh",
+      "bytes": 5583,
+      "sha256": "aca7af758a945f613bb820bb1d15a8ad4d7546cb12854364c894eb3db3887035"
+    },
+    {
+      "path": "sim_runtime/src/PublisherPlugin.cc",
+      "bytes": 5381,
+      "sha256": "2c542e19a00582f89125ec98a5aa7d1d428b425cd8d0e1f0670f1f2171df398b"
+    },
+    {
+      "path": "sim_runtime/src/PublisherPlugin.hh",
+      "bytes": 3227,
+      "sha256": "826d4a12b2853840f35e56c97c964cb7cd608f97e1d3ef28dc19496d9ce3281c"
+    },
+    {
+      "path": "sim_runtime/src/ShapeVolume.cc",
+      "bytes": 6549,
+      "sha256": "aacece3d836e2f274eda662e793937b9bd8c880b0dd4836fc5c065060e3d78d8"
+    },
+    {
+      "path": "sim_runtime/src/ShapeVolume.hh",
+      "bytes": 4618,
+      "sha256": "93757a9f6e17ecb8a062eda57654c1a236cf920e127ff5a5f425ecd0f48cc848"
+    },
+    {
+      "path": "sim_runtime/src/WaveVisual.cc",
+      "bytes": 15228,
+      "sha256": "ea34eed72fa8a86c0775350ba24c78a7906225e4f946ce68e219f704ec0b9016"
+    },
+    {
+      "path": "sim_runtime/src/WaveVisual.hh",
+      "bytes": 1916,
+      "sha256": "ecf28340341f97cf68eb409c275a619ba8527137ecd4ebd49e18a2bc124ef8fb"
+    },
+    {
+      "path": "sim_runtime/src/Wavefield.cc",
+      "bytes": 26812,
+      "sha256": "83b0ada735083ed0d9b7b40283710e453d66a715e7d8e54188e35bfe456a016e"
+    },
+    {
+      "path": "sim_runtime/src/Wavefield.hh",
+      "bytes": 11653,
+      "sha256": "9d6e14b1d227bf5e19d16392270de0cc49602b16d7f46e6dedcade6aa3a5d6bf"
+    }
+  ],
+  "total_bytes": 162399203
+}

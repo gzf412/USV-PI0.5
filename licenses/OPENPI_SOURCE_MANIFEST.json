@@ -1,0 +1,233 @@
+{
+  "repository": "https://github.com/Physical-Intelligence/openpi",
+  "upstream_commit": "215abfb217dbac7d5f1273282331b9b1866c0479",
+  "source_note": "Copied from the local modified openpi checkout. USV state/action/tokenization adaptations were already present; this project additionally removes unrelated model and robot implementations. Original checkout is unchanged.",
+  "licenses": [
+    "licenses/OPENPI_LICENSE",
+    "licenses/LICENSE_GEMMA.txt"
+  ],
+  "files": [
+    {
+      "file": "src/openpi/__init__.py",
+      "upstream_file": "src/openpi/__init__.py",
+      "upstream_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "current_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "src/openpi/models/__init__.py",
+      "upstream_file": "src/openpi/models/__init__.py",
+      "upstream_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "current_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "src/openpi/models/gemma.py",
+      "upstream_file": "src/openpi/models/gemma.py",
+      "upstream_sha256": "7e42ada4ae7e9995f0ef3e33a0c224758323c2015e2d9d72ec15726a8a001d2a",
+      "current_sha256": "7e42ada4ae7e9995f0ef3e33a0c224758323c2015e2d9d72ec15726a8a001d2a"
+    },
+    {
+      "file": "src/openpi/models/lora.py",
+      "upstream_file": "src/openpi/models/lora.py",
+      "upstream_sha256": "ced28716950c34d84a1a6d0b03b1d9550000732721df884818080b6e78cb3289",
+      "current_sha256": "ced28716950c34d84a1a6d0b03b1d9550000732721df884818080b6e78cb3289"
+    },
+    {
+      "file": "src/openpi/models/model.py",
+      "upstream_file": "src/openpi/models/model.py",
+      "upstream_sha256": "0d74bc1d8f4623ac3d8e543710b8bf75f9b95e588a3ebf6127c659e001385cff",
+      "current_sha256": "e2a14e5622cb104fdc78caa9b04617663a7e181710ef1ed2fbb2e449d0eb0d4e"
+    },
+    {
+      "file": "src/openpi/models/pi0.py",
+      "upstream_file": "src/openpi/models/pi0.py",
+      "upstream_sha256": "26024917eaf4d9b86e992fbd66f5dfcb969b1d0fe6690bb45881ea5c0f06ce1c",
+      "current_sha256": "26024917eaf4d9b86e992fbd66f5dfcb969b1d0fe6690bb45881ea5c0f06ce1c"
+    },
+    {
+      "file": "src/openpi/models/pi0_config.py",
+      "upstream_file": "src/openpi/models/pi0_config.py",
+      "upstream_sha256": "9459cf01b42f06a7d256577abdb0367ff4aa3484018083d04fa495ca03f3bd56",
+      "current_sha256": "114fad5abb7d1a238645415ae0d727c7f8aebaa20551b9d81d13b125c1327f4e"
+    },
+    {
+      "file": "src/openpi/models/siglip.py",
+      "upstream_file": "src/openpi/models/siglip.py",
+      "upstream_sha256": "14b4df0be280d5769fb0dc31a40cde27525dbb1980cc998c28475d62fa3cad32",
+      "current_sha256": "14b4df0be280d5769fb0dc31a40cde27525dbb1980cc998c28475d62fa3cad32"
+    },
+    {
+      "file": "src/openpi/models/tokenizer.py",
+      "upstream_file": "src/openpi/models/tokenizer.py",
+      "upstream_sha256": "71211aa7243f1f2e642369d17eaf8f07d0f67ffeca26c4ab87557be4a66593d4",
+      "current_sha256": "e13fda67f9f587d19b063fa8579e460335d5e7baaa2b792e35cf4a4baf42f917"
+    },
+    {
+      "file": "src/openpi/policies/__init__.py",
+      "upstream_file": null,
+      "upstream_sha256": null,
+      "current_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "src/openpi/policies/policy.py",
+      "upstream_file": "src/openpi/policies/policy.py",
+      "upstream_sha256": "a2ac5236e23b11d0f5a840d4a8fef148d89dba921d5452ec5dfcd5a6ffa46f20",
+      "current_sha256": "25a9c81480ead0a572dbcf3dfefed76dbf53000e9d3ec2c4bba1147003c51df3"
+    },
+    {
+      "file": "src/openpi/policies/policy_config.py",
+      "upstream_file": "src/openpi/policies/policy_config.py",
+      "upstream_sha256": "aaf42ab04a33b6c91d2447926211646c33ebd8ebfa427f026d7b6c4f7c45ec52",
+      "current_sha256": "af75433add1a51757890150a429c376ff44e5b44110b6d9ab83692b05efd123b"
+    },
+    {
+      "file": "src/openpi/policies/usv_policy.py",
+      "upstream_file": "src/openpi/policies/usv_policy.py",
+      "upstream_sha256": "9e229a85a02554c00355106cba99e63b6c143f580b5a65e14d963d242a494a69",
+      "current_sha256": "9e229a85a02554c00355106cba99e63b6c143f580b5a65e14d963d242a494a69"
+    },
+    {
+      "file": "src/openpi/py.typed",
+      "upstream_file": "src/openpi/py.typed",
+      "upstream_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "current_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "src/openpi/serving/__init__.py",
+      "upstream_file": null,
+      "upstream_sha256": null,
+      "current_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "src/openpi/serving/websocket_policy_server.py",
+      "upstream_file": "src/openpi/serving/websocket_policy_server.py",
+      "upstream_sha256": "1370d345e6c3c5b8f15573050e485e60a5b423d1df33e24b237805e6b442b026",
+      "current_sha256": "1370d345e6c3c5b8f15573050e485e60a5b423d1df33e24b237805e6b442b026"
+    },
+    {
+      "file": "src/openpi/shared/__init__.py",
+      "upstream_file": "src/openpi/shared/__init__.py",
+      "upstream_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "current_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "src/openpi/shared/array_typing.py",
+      "upstream_file": "src/openpi/shared/array_typing.py",
+      "upstream_sha256": "6524945566eab3eb97b75a6280ba4724617b4d028c55f05172b283c3de68a026",
+      "current_sha256": "6524945566eab3eb97b75a6280ba4724617b4d028c55f05172b283c3de68a026"
+    },
+    {
+      "file": "src/openpi/shared/download.py",
+      "upstream_file": "src/openpi/shared/download.py",
+      "upstream_sha256": "a12054a6ddaab4efa833c4ff49a1aba00c63759e4e88d6be21c1e0b3307fd9b2",
+      "current_sha256": "cad91491ceb70023a017d916b1915ae0f729a39159c3f8394ad55645cbbc2997"
+    },
+    {
+      "file": "src/openpi/shared/image_tools.py",
+      "upstream_file": "src/openpi/shared/image_tools.py",
+      "upstream_sha256": "0f8fcb355288119e56acb56d550c1cc1f3a9edddceb0dc5b319f955943ef7767",
+      "current_sha256": "0f8fcb355288119e56acb56d550c1cc1f3a9edddceb0dc5b319f955943ef7767"
+    },
+    {
+      "file": "src/openpi/shared/nnx_utils.py",
+      "upstream_file": "src/openpi/shared/nnx_utils.py",
+      "upstream_sha256": "4da7111ba3011c4d1c381c9ed17257771df6a50ed89182647c3fb6f79208005e",
+      "current_sha256": "4da7111ba3011c4d1c381c9ed17257771df6a50ed89182647c3fb6f79208005e"
+    },
+    {
+      "file": "src/openpi/shared/normalize.py",
+      "upstream_file": "src/openpi/shared/normalize.py",
+      "upstream_sha256": "6c2cea4946fb07e51801530400d2b2fd94730e195cd290d6b6960114eca9739d",
+      "current_sha256": "6c2cea4946fb07e51801530400d2b2fd94730e195cd290d6b6960114eca9739d"
+    },
+    {
+      "file": "src/openpi/training/__init__.py",
+      "upstream_file": null,
+      "upstream_sha256": null,
+      "current_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "src/openpi/training/checkpoints.py",
+      "upstream_file": "src/openpi/training/checkpoints.py",
+      "upstream_sha256": "3cc32682ec3609e9075dabd991488edb9d7f6c045443f58963d733f99c468dbd",
+      "current_sha256": "3cc32682ec3609e9075dabd991488edb9d7f6c045443f58963d733f99c468dbd"
+    },
+    {
+      "file": "src/openpi/training/config.py",
+      "upstream_file": "src/openpi/training/config.py",
+      "upstream_sha256": "53bf7696fa62d2682393043861d789340db442ea86e0984e970c68875c0effeb",
+      "current_sha256": "c8787fab74f3d1d2ad894e8d3fc64115654b9527422e9a8be11d5ea1b6b71cc8"
+    },
+    {
+      "file": "src/openpi/training/data_loader.py",
+      "upstream_file": "src/openpi/training/data_loader.py",
+      "upstream_sha256": "4d0b055ac28527c1ab1f0ba7496057722c7c748c88564a8de2ff4fac650e97c9",
+      "current_sha256": "d1c96373acc7ac8148a0cb774317c0e8772a372f5b1e5b03cbbdfafb04981639"
+    },
+    {
+      "file": "src/openpi/training/optimizer.py",
+      "upstream_file": "src/openpi/training/optimizer.py",
+      "upstream_sha256": "cfb5d6f6aec61fbe961287b4015c652260628a0ed4682a0dbdc271b8e65431fa",
+      "current_sha256": "cfb5d6f6aec61fbe961287b4015c652260628a0ed4682a0dbdc271b8e65431fa"
+    },
+    {
+      "file": "src/openpi/training/sharding.py",
+      "upstream_file": "src/openpi/training/sharding.py",
+      "upstream_sha256": "c67c4112a126ab097571c8a882fd1ee3f106b15b6e608e7205ac7f29b44ca985",
+      "current_sha256": "c67c4112a126ab097571c8a882fd1ee3f106b15b6e608e7205ac7f29b44ca985"
+    },
+    {
+      "file": "src/openpi/training/utils.py",
+      "upstream_file": "src/openpi/training/utils.py",
+      "upstream_sha256": "b684e674343f86ef5e976f279a586d3fe2f885e901f396ac899ed136abc7eca6",
+      "current_sha256": "b684e674343f86ef5e976f279a586d3fe2f885e901f396ac899ed136abc7eca6"
+    },
+    {
+      "file": "src/openpi/training/weight_loaders.py",
+      "upstream_file": "src/openpi/training/weight_loaders.py",
+      "upstream_sha256": "a54ac3222f81f8c6233241bc16b6f369c9416cdaa83f7058f96f7ddcfde1a3b4",
+      "current_sha256": "a54ac3222f81f8c6233241bc16b6f369c9416cdaa83f7058f96f7ddcfde1a3b4"
+    },
+    {
+      "file": "src/openpi/transforms.py",
+      "upstream_file": "src/openpi/transforms.py",
+      "upstream_sha256": "6b85607e9dc32712f3e0b5d903e29bfe5a224afcab5712378d6edfc345bb952d",
+      "current_sha256": "43f796780bfe5b764f8a42544224bac69b5653a44907738b5916bc767ab18367"
+    },
+    {
+      "file": "src/openpi_client/__init__.py",
+      "upstream_file": "packages/openpi-client/src/openpi_client/__init__.py",
+      "upstream_sha256": "91447944015cec709e8aa7655f7e9d64e1e4508e7023a57fe3746911c0fc6fed",
+      "current_sha256": "91447944015cec709e8aa7655f7e9d64e1e4508e7023a57fe3746911c0fc6fed"
+    },
+    {
+      "file": "src/openpi_client/base_policy.py",
+      "upstream_file": "packages/openpi-client/src/openpi_client/base_policy.py",
+      "upstream_sha256": "88e98e0f06293f3c4767db675061664c4bba12f87242ba1e64377d1b8de8069e",
+      "current_sha256": "88e98e0f06293f3c4767db675061664c4bba12f87242ba1e64377d1b8de8069e"
+    },
+    {
+      "file": "src/openpi_client/image_tools.py",
+      "upstream_file": "packages/openpi-client/src/openpi_client/image_tools.py",
+      "upstream_sha256": "d48b4bd7f44e79fe6db8a8e07c9161144fa250be686e1245014a8b47e6171977",
+      "current_sha256": "d48b4bd7f44e79fe6db8a8e07c9161144fa250be686e1245014a8b47e6171977"
+    },
+    {
+      "file": "src/openpi_client/msgpack_numpy.py",
+      "upstream_file": "packages/openpi-client/src/openpi_client/msgpack_numpy.py",
+      "upstream_sha256": "c04568948fcee52b691e3be4b6cffb759f7e79ad67530fcd5d23095a0d13c057",
+      "current_sha256": "c04568948fcee52b691e3be4b6cffb759f7e79ad67530fcd5d23095a0d13c057"
+    },
+    {
+      "file": "src/openpi_client/websocket_client_policy.py",
+      "upstream_file": "packages/openpi-client/src/openpi_client/websocket_client_policy.py",
+      "upstream_sha256": "36557cb0b91ccf31cd4fb4b508306850d76ed0feb4028dac5182d0f5a5d88005",
+      "current_sha256": "36557cb0b91ccf31cd4fb4b508306850d76ed0feb4028dac5182d0f5a5d88005"
+    },
+    {
+      "file": "scripts/train.py",
+      "upstream_file": "scripts/train.py",
+      "upstream_sha256": "22f98a06aaa6e68e0f725d727ab95398238d1cae8a46bb94e829f330758a9baf",
+      "current_sha256": "afc234a156b82467129611c85e2f2aba8a24d09ecc497edabf71571ed740393b"
+    }
+  ]
+}
