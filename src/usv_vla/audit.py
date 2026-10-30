@@ -74,7 +74,7 @@ def audit_episode(directory, *, check_images=True):
         validate_scene(scene)
         first_pose = rows[0]['pose_xyzrpy']
         visibility = initial_visibility(scene, [*first_pose[:3], first_pose[5]])
-        if scene.get('dataset_type') in ('green_multi_v1', 'red_multi_v1', 'blue_multi_v1'):
+        if scene.get('dataset_type') in ('green_multi_v1', 'red_multi_v1', 'blue_multi_v1', 'yellow_multi_v1'):
             by_model = {item['model']: item for item in visibility['buoys'] + visibility['cylinders']}
             required = set(metadata['route'].get('required_obstacle_models', [])) | set(metadata['route'].get('cylinder_models', []))
             if any(model not in by_model or not by_model[model]['unobstructed_visible'] for model in required):

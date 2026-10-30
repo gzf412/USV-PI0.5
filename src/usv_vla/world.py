@@ -136,7 +136,7 @@ def build_world(output, *, count=1, target=0, destination=None, kind="approach",
         from usv_vla.scene_plan import validate_scene
         scene = copy.deepcopy(scene)
         computed_visibility = validate_scene(scene)
-        if scene.get("dataset_type") in ("green_multi_v1", "red_multi_v1", "blue_multi_v1"):
+        if scene.get("dataset_type") in ("green_multi_v1", "red_multi_v1", "blue_multi_v1", "yellow_multi_v1"):
             count, target, destination, kind = len(scene["buoys"]), scene["target_slot"], None, "approach"
         else:
             count, target, destination, kind = 1, 0, None, "approach"
@@ -151,7 +151,7 @@ def build_world(output, *, count=1, target=0, destination=None, kind="approach",
     available = [i for i in range(8) if i not in required]
     rng.shuffle(available)
     selected = ([row["slot"] for row in scene["buoys"]]
-                if scene and scene.get("dataset_type") in ("green_multi_v1", "red_multi_v1", "blue_multi_v1")
+                if scene and scene.get("dataset_type") in ("green_multi_v1", "red_multi_v1", "blue_multi_v1", "yellow_multi_v1")
                 else required+available[:count-len(required)])
     output = Path(output).resolve()
     output.parent.mkdir(parents=True, exist_ok=True)
@@ -178,7 +178,7 @@ def build_world(output, *, count=1, target=0, destination=None, kind="approach",
         return (initial_pose[0]+math.cos(reference)*forward-math.sin(reference)*left,
                 initial_pose[1]+math.sin(reference)*forward+math.cos(reference)*left)
     positions = ({row["slot"]: [row["x"], row["y"]] for row in scene["buoys"]}
-                 if scene and scene.get("dataset_type") in ("green_multi_v1", "red_multi_v1", "blue_multi_v1")
+                 if scene and scene.get("dataset_type") in ("green_multi_v1", "red_multi_v1", "blue_multi_v1", "yellow_multi_v1")
                  else {target: scene["target_xy"] if scene else global_xy(distance_m, 0)})
     if destination is not None:
         positions[destination] = global_xy(distance_m+8, 0)

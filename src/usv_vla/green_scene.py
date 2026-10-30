@@ -68,7 +68,7 @@ def initial_visibility_green(scene, pose=None):
 def validate_green_scene(scene):
     from usv_vla.scene_plan import CATEGORIES, _segment_distance, shore_clearance
 
-    target_slot = {'red_multi_v1': 0, 'blue_multi_v1': 6}.get(scene.get('dataset_type'), TARGET_SLOT)
+    target_slot = {'red_multi_v1': 0, 'yellow_multi_v1': 2, 'blue_multi_v1': 6}.get(scene.get('dataset_type'), TARGET_SLOT)
     target_color = BUOY_SLOTS[target_slot][0]
 
     if scene.get("category") not in CATEGORIES:

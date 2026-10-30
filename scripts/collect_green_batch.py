@@ -148,6 +148,16 @@ def validate_recording(episode, scene, ffmpeg, mode):
     rows = [json.loads(line) for line in (episode / 'steps.jsonl').read_text().splitlines() if line.strip()]
     if len(rows) != summary['steps'] or len(rows) < 3:
         raise ValueError('Missing decision rows')
+    gps_state_present = 'state_gps_v3' in rows[0]
+    if gps_state_present or scene.get('dataset_type') == 'yellow_multi_v1':
+        from usv_vla.export_lerobot import selected_gps_fixes
+        from usv_vla.gps_state import gps_position_state
+        fixes = selected_gps_fixes(episode, rows)
+        for row, fix in zip(rows, fixes):
+            actual_gps_state = np.asarray(row.get('state_gps_v3'), dtype=np.float64)
+            expected_gps_state = gps_position_state(row['state'], fix)
+            if actual_gps_state.shape != (35,) or not np.allclose(actual_gps_state, expected_gps_state, atol=1e-9, rtol=0):
+                raise ValueError('35D GPS state missing or inconsistent with selected GPS measurement')
     instruction = scene['route']['instruction']
     if scene['route'].get('prompt_include_phase') is not False or any(row['prompt'] != instruction for row in rows):
         raise ValueError('Task text must remain fixed without teacher phase')
@@ -197,13 +207,17 @@ def validate_recording(episode, scene, ffmpeg, mode):
         if abs(found[0]['heading_deg']) > 10.:
             raise ValueError(f'Gate {number} heading exceeds the 10 degree smoothness standard')
         crossings.append(found[0])
-    shore = review_green_shore(episode) if mode == 'shore' else None
+    if mode == 'shore' and scene.get('supplement') == 'shore_clear_10':
+        from collect_shore_clear_supplement import review_clear
+        shore = review_clear(episode, scene)
+    else:
+        shore = review_green_shore(episode) if mode == 'shore' else None
     if shore is not None and (shore.get('passed') is not True or shore.get('issues')):
         raise ValueError('Bank obstacle / return review failed: ' + str(shore.get('issues')))
     result = dict(validated_at=bc._now(), scene_sha256=bc._digest(scene), audit=audit,
                   videos=videos, trajectory_quality=quality, initial_actual_visibility=visibility,
                   target_slot=scene['target_slot'], buoy_slots=sorted(actual), gate_crossings=crossings,
-                  state_shape=[33], action_shape=[2], strict_10hz_grid=True,
+                  state_shape=[33], gps_state_shape=([35] if gps_state_present else None), action_shape=[2], strict_10hz_grid=True,
                   steps=len(rows), shore_review=shore,
                   steps_sha256=hash_file(episode/'steps.jsonl'),
                   payload_fingerprint=payload_fingerprint(episode, rows))

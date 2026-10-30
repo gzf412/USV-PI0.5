@@ -222,7 +222,7 @@ def review_green_shore(episode):
     rows = [json.loads(line) for line in steps_path.read_text().splitlines() if line.strip()]
     scene = metadata["scene_plan"]
     route, info = scene["route"], scene["shore_obstacle"]
-    target_slot = {'green_multi_v1': 4, 'blue_multi_v1': 6}.get(scene.get('dataset_type'))
+    target_slot = {'green_multi_v1': 4, 'yellow_multi_v1': 2, 'blue_multi_v1': 6}.get(scene.get('dataset_type'))
     if (target_slot is None or scene.get("target_slot") != target_slot
             or info.get("profile") != PROFILE or route.get("kind") != "cylinder_pass"):
         raise ValueError("not a green shore obstacle episode")
