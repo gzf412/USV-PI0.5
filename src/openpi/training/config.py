@@ -169,11 +169,12 @@ class LeRobotUSVDataConfig(DataConfigFactory):
     def create(self, assets_dirs: pathlib.Path, model_config: _model.BaseModelConfig) -> DataConfig:
         if not isinstance(model_config, pi0_config.Pi0Config) or not model_config.pi05:
             raise ValueError("USV v1 expects the pi0.5 model path.")
-        if (model_config.state_dim, model_config.action_dim) != (33, 2):
-            raise ValueError("USV v1 requires state_dim=33 and action_dim=2.")
+        if model_config.state_dim not in (33, 39) or model_config.action_dim != 2:
+            raise ValueError("USV requires state_dim=33 or 39 and action_dim=2.")
+        state_version = 2 if model_config.state_dim == 39 else 1
         return DataConfig(
             repo_id=self.repo_id,
-            asset_id="usv_v1",
+            asset_id=f"usv_v{state_version}",
             norm_stats={},
             repack_transforms=_transforms.Group(inputs=[_transforms.RepackTransform({
                 "images": {"front": "observation.images.front"},
@@ -181,7 +182,7 @@ class LeRobotUSVDataConfig(DataConfigFactory):
                 "actions": "action",
                 "prompt": "prompt",
             })]),
-            data_transforms=_transforms.Group(inputs=[usv_policy.UsvInputs()], outputs=[usv_policy.UsvOutputs()]),
+            data_transforms=_transforms.Group(inputs=[usv_policy.UsvInputs(state_version=state_version)], outputs=[usv_policy.UsvOutputs()]),
             model_transforms=ModelTransformFactory()(model_config),
             action_sequence_keys=("action",),
             prompt_from_task=True,
@@ -279,6 +280,17 @@ class TrainConfig:
 
 
 _CONFIGS = [
+    TrainConfig(
+        name="pi05_usv_gps",
+        model=pi0_config.Pi0Config(pi05=True, state_dim=39, action_dim=2, action_horizon=10,
+                                   max_token_len=384, strict_tokenization=True),
+        data=LeRobotUSVDataConfig(repo_id="local/usv_v2"),
+        weight_loader=weight_loaders.PaliGemmaWeightLoader(),
+        batch_size=4,
+        wandb_enabled=False,
+        policy_metadata={"state_dim": 39, "state_version": 2, "action_dim": 2,
+                         "action_units": "N", "policy_hz": 10, "proposed_execute_steps": 1},
+    ),
     TrainConfig(
         name="pi05_usv",
         model=pi0_config.Pi0Config(

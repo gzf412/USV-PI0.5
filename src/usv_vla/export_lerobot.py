@@ -151,10 +151,44 @@ def training_instruction(metadata, rows):
     return instruction
 
 
-def export(episodes,repo_id,output,*,image_format='original-jpeg'):
+def gps_v2_states(directory, rows):
+    """Match the exact GPS message selected by each historical decision."""
+    from usv_vla.gps_state import extend_state
+    required = {(r['sources']['gps']['source_time_ns'], r['sources']['gps']['arrival_monotonic_ns']) for r in rows}
+    fixes = {}
+    with (Path(directory) / 'raw_sensors.jsonl').open() as stream:
+        for line in stream:
+            item = json.loads(line)
+            if item.get('kind') != 'gps':
+                continue
+            key = (item['source_time_ns'], item['arrival_monotonic_ns'])
+            if key in required:
+                if key in fixes:
+                    raise ValueError('Duplicate GPS provenance in raw recording')
+                msg = item['message']
+                fixes[key] = (msg.get('latitude_deg', 0.0), msg.get('longitude_deg', 0.0))
+    if required != fixes.keys():
+        raise ValueError('Missing selected raw GPS fix; refusing to invent position')
+    first = rows[0]['sources']['gps']
+    origin = fixes[(first['source_time_ns'], first['arrival_monotonic_ns'])]
+    states = []
+    for row in rows:
+        key = (row['sources']['gps']['source_time_ns'], row['sources']['gps']['arrival_monotonic_ns'])
+        state = extend_state(row['state'], origin=origin, gps=fixes[key])
+        if 'state_gps_v2' in row:
+            recorded = np.asarray(row['state_gps_v2'], dtype=np.float32)
+            if recorded.shape != (39,) or not np.allclose(recorded, state, atol=1e-4, rtol=0):
+                raise ValueError('Recorded GPS state differs from raw fix or has an unsupported GPS goal')
+        states.append(state)
+    return states
+
+
+def export(episodes,repo_id,output,*,image_format='original-jpeg',state_version=1):
     from lerobot.common.datasets.lerobot_dataset import LeRobotDataset
     if image_format not in ('png', 'original-jpeg'):
         raise ValueError('Image format must be png or original-jpeg')
+    if state_version not in (1, 2):
+        raise ValueError('State version must be 1 or 2')
     output=Path(output).resolve()
     if output.exists():
         raise FileExistsError(f'Refusing to overwrite {output}')
@@ -181,7 +215,7 @@ def export(episodes,repo_id,output,*,image_format='original-jpeg'):
     dataset=LeRobotDataset.create(repo_id=repo_id,root=output,robot_type='usv_differential_thrust',fps=10,
         use_videos=False,image_writer_threads=2 if image_format == 'png' else 0,tolerance_s=.025,features={
             'observation.images.front':{'dtype':'image','shape':(720,1280,3),'names':['height','width','channel']},
-            'observation.state':{'dtype':'float32','shape':(33,),'names':['state']},
+            'observation.state':{'dtype':'float32','shape':(33 if state_version == 1 else 39,),'names':['state']},
             'action':{'dtype':'float32','shape':(2,),'names':['left_thrust_N','right_thrust_N']},
         })
     if image_format == 'original-jpeg':
@@ -201,7 +235,8 @@ def export(episodes,repo_id,output,*,image_format='original-jpeg'):
         for directory, instruction in zip(episodes, instructions):
             directory=Path(directory)
             rows=[json.loads(line) for line in (directory/'steps.jsonl').read_text().splitlines()]
-            for row in rows:
+            states = [row['state'] for row in rows] if state_version == 1 else gps_v2_states(directory, rows)
+            for row, state in zip(rows, states):
                 source_image = directory/row['image']
                 with Image.open(source_image) as image:
                     if image_format == 'original-jpeg' and image.format != 'JPEG':
@@ -211,14 +246,14 @@ def export(episodes,repo_id,output,*,image_format='original-jpeg'):
                     jpeg_source['path'] = source_image
                 dataset.add_frame({
                     'observation.images.front':rgb,
-                    'observation.state':np.asarray(row['state'],np.float32),
+                    'observation.state':np.asarray(state,np.float32),
                     'action':np.asarray(row['action'],np.float32),
                     'task':instruction,
                 })
             dataset.save_episode()
     finally:
         dataset.stop_image_writer()
-    report=dict(repo_id=repo_id,root=str(output),episodes=audits,frames=sum(x['steps'] for x in audits),
+    report=dict(repo_id=repo_id,root=str(output),episodes=audits,frames=sum(x['steps'] for x in audits), state_version=state_version,
                 published=False,units='raw state, raw thrust N; normalized once by UsvInputs',
                 data_split='none; caller must split whole episodes/layouts before formal training',
                 image_storage='original JPEG bytes embedded in parquet' if image_format == 'original-jpeg' else 'PNG encoded in parquet',
@@ -235,5 +270,7 @@ if __name__=='__main__':
     parser.add_argument('--repo-id',default='local/usv_v1')
     parser.add_argument('--output',required=True)
     parser.add_argument('--image-format',choices=['png','original-jpeg'],default='original-jpeg')
+    parser.add_argument('--state-version',type=int,choices=[1,2],default=1,
+                        help='2 adds causally aligned GPS position; historical GPS targets remain absent')
     args=parser.parse_args()
-    print(json.dumps(export(args.episodes,args.repo_id,args.output,image_format=args.image_format),indent=2))
+    print(json.dumps(export(args.episodes,args.repo_id,args.output,image_format=args.image_format,state_version=args.state_version),indent=2))

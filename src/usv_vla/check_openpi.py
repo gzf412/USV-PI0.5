@@ -15,6 +15,23 @@ from openpi.transforms import PadStatesAndActions
 
 
 class AdapterChecks(unittest.TestCase):
+    def test_gps_v2_config_and_tokenizer(self):
+        from openpi.training.config import get_config
+        from openpi.models.tokenizer import PaligemmaTokenizer
+        from usv_vla.gps_state import extend_state
+        config = get_config('pi05_usv_gps')
+        self.assertEqual((config.model.state_dim, config.model.action_dim), (39, 2))
+        config.data.create(config.assets_dirs, config.model)
+        state = extend_state(np.zeros(33), gps=(0., 0.), origin=(0., 0.),
+                             goal=(0., .0005), yaw=0.)
+        result = UsvInputs(state_version=2)({'state': state, 'images': {'front': np.zeros((8,8,3), np.uint8)}})
+        self.assertEqual(result['state'].shape, (39,))
+        _, mask = PaligemmaTokenizer(384, strict=True).tokenize('Go to the GPS target and stop.', result['state'])
+        self.assertLess(int(mask.sum()), 384)
+        obs, actions = config.model.inputs_spec()
+        self.assertEqual(obs.state.shape, (1, 39))
+        self.assertEqual(actions.shape, (1, 10, 2))
+
     def test_offline_paligemma_initialization_preserves_new_action_weights(self):
         from openpi.training.weight_loaders import PaliGemmaWeightLoader
         with tempfile.TemporaryDirectory() as directory:

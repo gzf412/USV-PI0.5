@@ -31,8 +31,8 @@ def main():
             if request.get("type") != "infer":
                 raise ValueError("Unknown policy worker request")
             state = np.asarray(request["state"], dtype=np.float32)
-            if state.shape != (33,) or not np.isfinite(state).all():
-                raise ValueError("Worker requires finite raw state[33]")
+            if state.shape != (client.get_server_metadata()['state_dim'],) or not np.isfinite(state).all():
+                raise ValueError("Worker state shape differs from policy metadata")
             rgb = np.asarray(Image.open(io.BytesIO(base64.b64decode(request["image_jpeg"], validate=True))).convert("RGB"))
             observation = dict(state=state, images={"front":rgb}, prompt=request["prompt"])
             started = time.monotonic()

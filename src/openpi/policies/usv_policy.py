@@ -57,8 +57,19 @@ def normalize_state(state):
 
 @dataclasses.dataclass(frozen=True)
 class UsvInputs(transforms.DataTransformFn):
+    state_version: int = 1
+
     def __call__(self, data):
-        state = normalize_state(data["state"])
+        raw_state = np.asarray(data["state"], dtype=np.float32)
+        if self.state_version == 1:
+            state = normalize_state(raw_state)
+        elif self.state_version == 2:
+            from usv_vla.gps_state import normalize_extra
+            if raw_state.shape != (39,):
+                raise ValueError("USV GPS state must have 39 dimensions")
+            state = np.concatenate((normalize_state(raw_state[:33]), normalize_extra(raw_state[33:])))
+        else:
+            raise ValueError("Unknown USV state version")
         incoming = data["images"]
         if "front" not in incoming or set(incoming) - set(CAMERAS):
             raise ValueError("USV images require front, with optional left/right views.")

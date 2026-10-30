@@ -21,7 +21,9 @@ from PIL import Image
 def validate_metadata(metadata):
     if not isinstance(metadata, dict):
         raise ValueError("Policy metadata must be an object")
-    for key, expected in (("state_dim", 33), ("action_dim", 2), ("action_units", "N")):
+    if type(metadata.get("state_dim")) is not int or metadata["state_dim"] not in (33, 39):
+        raise ValueError("Policy metadata requires state_dim=33 or 39")
+    for key, expected in (("action_dim", 2), ("action_units", "N")):
         if metadata.get(key) != expected or isinstance(metadata.get(key), bool):
             raise ValueError(f"Policy metadata requires {key}={expected!r}")
     return metadata
@@ -41,8 +43,8 @@ def first_action(actions):
 def request_message(request_id, state, rgb, prompt, decision_sim_ns, decision_wall_ns, sources):
     state = np.asarray(state, dtype=np.float32)
     rgb = np.asarray(rgb)
-    if state.shape != (33,) or not np.isfinite(state).all():
-        raise ValueError("Policy requires finite raw state[33]")
+    if state.shape not in ((33,), (39,)) or not np.isfinite(state).all():
+        raise ValueError("Policy requires finite raw state[33] or state[39]")
     if rgb.ndim != 3 or rgb.shape[-1] != 3 or rgb.dtype != np.uint8:
         raise ValueError("Policy requires HWC uint8 RGB")
     if not isinstance(prompt, str) or not prompt.strip():
@@ -126,6 +128,8 @@ class PolicyBridge:
 
     def submit(self, state, rgb, prompt, decision_sim_ns, decision_wall_ns, sources, row_index):
         self.check_deadline()
+        if np.asarray(state).shape != (self.metadata['state_dim'],):
+            raise ValueError('Observation state width does not match policy metadata')
         if self.pending is not None:
             raise RuntimeError("Only one policy request may be in flight")
         started_ns = time.monotonic_ns()

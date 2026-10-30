@@ -37,7 +37,7 @@ case "$subcommand" in
   train)
     shift
     # Training keeps the caller's accelerator selection; checks alone force CPU.
-    exec "$model_python" "$project_root/scripts/train.py" pi05_usv "$@"
+    exec "$model_python" "$project_root/scripts/train.py" "${USV_TRAIN_CONFIG:-pi05_usv}" "$@"
     ;;
   serve)
     shift
