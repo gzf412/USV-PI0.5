@@ -7,6 +7,9 @@ import numpy as np
 
 BUOY_SLOTS = tuple((color, shape) for color in ("red", "yellow", "green", "blue")
                    for shape in ("round", "pointed"))
+MULTI_TARGET_SLOTS = {'red_multi_v1': 0, 'yellow_multi_v1': 2, 'green_multi_v1': 4, 'blue_multi_v1': 6,
+                      **{f'{color}_pointed_multi_v1': slot for color, slot in
+                         (('red', 1), ('yellow', 3), ('green', 5), ('blue', 7))}}
 STATE_DIM, ACTION_DIM, MAX_FORCE = 33, 2, 15.0
 
 

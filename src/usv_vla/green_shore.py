@@ -13,7 +13,7 @@ from pathlib import Path
 
 import numpy as np
 
-from usv_vla.core import BUOY_SLOTS, TaskConfig, body_xy, wrap
+from usv_vla.core import BUOY_SLOTS, MULTI_TARGET_SLOTS, TaskConfig, body_xy, wrap
 from usv_vla.route import RouteTaskEvaluator, VESSEL_RADIUS_M, _segment_distance
 from usv_vla.scene_plan import project_object, shore_clearance, xy_from
 from usv_vla.world import ORIGIN
@@ -222,7 +222,7 @@ def review_green_shore(episode):
     rows = [json.loads(line) for line in steps_path.read_text().splitlines() if line.strip()]
     scene = metadata["scene_plan"]
     route, info = scene["route"], scene["shore_obstacle"]
-    target_slot = {'green_multi_v1': 4, 'yellow_multi_v1': 2, 'blue_multi_v1': 6}.get(scene.get('dataset_type'))
+    target_slot = MULTI_TARGET_SLOTS.get(scene.get('dataset_type'))
     if (target_slot is None or scene.get("target_slot") != target_slot
             or info.get("profile") != PROFILE or route.get("kind") != "cylinder_pass"):
         raise ValueError("not a green shore obstacle episode")

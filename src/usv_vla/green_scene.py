@@ -8,7 +8,7 @@ import re
 
 import numpy as np
 
-from usv_vla.core import BUOY_SLOTS
+from usv_vla.core import BUOY_SLOTS, MULTI_TARGET_SLOTS
 from usv_vla.world import POINTED_BUOY_RAISE_M
 
 TARGET_SLOT = 4
@@ -68,8 +68,8 @@ def initial_visibility_green(scene, pose=None):
 def validate_green_scene(scene):
     from usv_vla.scene_plan import CATEGORIES, _segment_distance, shore_clearance
 
-    target_slot = {'red_multi_v1': 0, 'yellow_multi_v1': 2, 'blue_multi_v1': 6}.get(scene.get('dataset_type'), TARGET_SLOT)
-    target_color = BUOY_SLOTS[target_slot][0]
+    target_slot = MULTI_TARGET_SLOTS.get(scene.get('dataset_type'), TARGET_SLOT)
+    target_color, target_shape = BUOY_SLOTS[target_slot]
 
     if scene.get("category") not in CATEGORIES:
         raise ValueError("Unknown collection category.")
@@ -80,7 +80,7 @@ def validate_green_scene(scene):
     if len(target) != 2 or not np.isfinite(target).all():
         raise ValueError("target_xy must contain two finite coordinates.")
     if scene.get("target_slot") != target_slot:
-        raise ValueError("Target must match the dataset's round-buoy slot.")
+        raise ValueError("Target must match the dataset's buoy slot.")
     buoys = scene["buoys"]
     if not isinstance(buoys, list) or not 1 <= len(buoys) <= 8:
         raise ValueError("Need 1..8 uniquely assigned buoys.")
@@ -107,8 +107,8 @@ def validate_green_scene(scene):
     if route.get("kind") not in ("direct", "cylinder_pass", "cylinder_gap", "bank_follow"):
         raise ValueError("Unknown route kind.")
     instruction = route.get("instruction")
-    if not isinstance(instruction, str) or not re.search(rf"\b{target_color}\s+round\s+buoy\b", instruction, re.IGNORECASE):
-        raise ValueError("Instruction must uniquely specify the target round buoy.")
+    if not isinstance(instruction, str) or not re.search(rf"\b{target_color}\s+{target_shape}\s+buoy\b", instruction, re.IGNORECASE):
+        raise ValueError("Instruction must uniquely specify the target buoy color and shape.")
     if route.get("prompt_include_phase") is not False:
         raise ValueError("Only the fixed human instruction may be passed to the policy.")
     objects = [dict(model=f"v2_buoy_{b['slot']+1}", center=_xy(b), radius=buoy_radius(b["slot"])) for b in buoys]

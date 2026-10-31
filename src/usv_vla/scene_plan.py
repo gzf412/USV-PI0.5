@@ -14,6 +14,7 @@ import xml.etree.ElementTree as ET
 import numpy as np
 
 from usv_vla.paths import ASSETS
+from usv_vla.core import MULTI_TARGET_SLOTS
 from usv_vla.world import ORIGIN
 
 CATEGORIES = ("approach_visible", "approach_offscreen", "around_left", "around_right", "between", "shore")
@@ -117,7 +118,7 @@ def shore_clearance(point):
 
 def initial_visibility(scene, pose=None):
     """Recompute projection at [x,y,z,yaw], including a measured start pose."""
-    if scene.get("dataset_type") in ("green_multi_v1", "red_multi_v1", "blue_multi_v1", "yellow_multi_v1"):
+    if scene.get("dataset_type") in MULTI_TARGET_SLOTS:
         from usv_vla.green_scene import initial_visibility_green
         return initial_visibility_green(scene, pose)
     initial = scene["initial_pose"] if pose is None else pose
@@ -139,7 +140,7 @@ def initial_visibility(scene, pose=None):
 
 def validate_scene(scene):
     """Reject malformed or unsafe collection plans before launching Gazebo."""
-    if scene.get("dataset_type") in ("green_multi_v1", "red_multi_v1", "blue_multi_v1", "yellow_multi_v1"):
+    if scene.get("dataset_type") in MULTI_TARGET_SLOTS:
         from usv_vla.green_scene import validate_green_scene
         return validate_green_scene(scene)
     if scene.get("category") not in CATEGORIES:

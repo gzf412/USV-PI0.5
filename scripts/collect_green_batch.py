@@ -149,7 +149,7 @@ def validate_recording(episode, scene, ffmpeg, mode):
     if len(rows) != summary['steps'] or len(rows) < 3:
         raise ValueError('Missing decision rows')
     gps_state_present = 'state_gps_v3' in rows[0]
-    if gps_state_present or scene.get('dataset_type') == 'yellow_multi_v1':
+    if gps_state_present or scene.get('dataset_type', '').endswith('_pointed_multi_v1') or scene.get('dataset_type') == 'yellow_multi_v1':
         from usv_vla.export_lerobot import selected_gps_fixes
         from usv_vla.gps_state import gps_position_state
         fixes = selected_gps_fixes(episode, rows)
